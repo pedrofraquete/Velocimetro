@@ -8,10 +8,21 @@ const SpeedometerChart = ({ totalHours }) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    // Make canvas responsive
+    const container = canvas.parentElement;
+    const containerWidth = container.clientWidth;
+    const isMobile = window.innerWidth < 640;
+    
+    const canvasWidth = Math.min(containerWidth - 32, isMobile ? 320 : 400);
+    const canvasHeight = isMobile ? 180 : 250;
+    
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+
     const ctx = canvas.getContext('2d');
     const centerX = canvas.width / 2;
-    const centerY = canvas.height - 50;
-    const radius = Math.min(canvas.width, canvas.height) * 0.35;
+    const centerY = canvas.height - (isMobile ? 30 : 50);
+    const radius = Math.min(canvas.width, canvas.height) * (isMobile ? 0.4 : 0.35);
 
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -24,7 +35,7 @@ const SpeedometerChart = ({ totalHours }) => {
 
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius, Math.PI, 0);
-    ctx.lineWidth = 25;
+    ctx.lineWidth = isMobile ? 18 : 25;
     ctx.strokeStyle = gradient;
     ctx.lineCap = 'round';
     ctx.stroke();
@@ -32,7 +43,7 @@ const SpeedometerChart = ({ totalHours }) => {
     // Draw background arc
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius, Math.PI, 0);
-    ctx.lineWidth = 30;
+    ctx.lineWidth = isMobile ? 22 : 30;
     ctx.strokeStyle = '#f1f5f9';
     ctx.globalCompositeOperation = 'destination-over';
     ctx.stroke();
@@ -42,8 +53,8 @@ const SpeedometerChart = ({ totalHours }) => {
     const maxHours = 1000;
     for (let i = 0; i <= 10; i++) {
       const angle = Math.PI + (i / 10) * Math.PI;
-      const markerLength = i % 5 === 0 ? 15 : 8;
-      const textRadius = radius + 35;
+      const markerLength = i % 5 === 0 ? (isMobile ? 10 : 15) : (isMobile ? 6 : 8);
+      const textRadius = radius + (isMobile ? 25 : 35);
       
       // Marker lines
       const startX = centerX + Math.cos(angle) * (radius - markerLength);
@@ -58,14 +69,14 @@ const SpeedometerChart = ({ totalHours }) => {
       ctx.strokeStyle = '#64748b';
       ctx.stroke();
       
-      // Labels
-      if (i % 2 === 0) {
+      // Labels (show fewer labels on mobile)
+      if ((!isMobile && i % 2 === 0) || (isMobile && i % 5 === 0)) {
         const labelX = centerX + Math.cos(angle) * textRadius;
         const labelY = centerY + Math.sin(angle) * textRadius;
         const hours = (i / 10) * maxHours;
         
         ctx.fillStyle = '#475569';
-        ctx.font = '12px Inter, system-ui, sans-serif';
+        ctx.font = `${isMobile ? '10' : '12'}px Inter, system-ui, sans-serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(hours.toString(), labelX, labelY);
@@ -84,26 +95,26 @@ const SpeedometerChart = ({ totalHours }) => {
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
     ctx.lineTo(needleX, needleY);
-    ctx.lineWidth = 4;
+    ctx.lineWidth = isMobile ? 3 : 4;
     ctx.strokeStyle = '#1e293b';
     ctx.lineCap = 'round';
     ctx.stroke();
     
     // Draw center circle
     ctx.beginPath();
-    ctx.arc(centerX, centerY, 8, 0, 2 * Math.PI);
+    ctx.arc(centerX, centerY, isMobile ? 6 : 8, 0, 2 * Math.PI);
     ctx.fillStyle = '#1e293b';
     ctx.fill();
 
     // Draw current hours text
     ctx.fillStyle = '#1e293b';
-    ctx.font = 'bold 24px Inter, system-ui, sans-serif';
+    ctx.font = `bold ${isMobile ? '18' : '24'}px Inter, system-ui, sans-serif`;
     ctx.textAlign = 'center';
-    ctx.fillText(`${totalHours.toFixed(1)}h`, centerX, centerY + 40);
+    ctx.fillText(`${totalHours.toFixed(1)}h`, centerX, centerY + (isMobile ? 30 : 40));
     
     ctx.fillStyle = '#64748b';
-    ctx.font = '14px Inter, system-ui, sans-serif';
-    ctx.fillText(`${(progress * 100).toFixed(1)}% da meta`, centerX, centerY + 60);
+    ctx.font = `${isMobile ? '12' : '14'}px Inter, system-ui, sans-serif`;
+    ctx.fillText(`${(progress * 100).toFixed(1)}% da meta`, centerX, centerY + (isMobile ? 45 : 60));
 
   }, [totalHours]);
 
