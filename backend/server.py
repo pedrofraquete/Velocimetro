@@ -9,7 +9,7 @@ from pydantic import BaseModel, Field
 from typing import List, Optional
 import uuid
 from datetime import datetime
-from google_sheets import sheets_service
+from google_forms_integration import google_forms
 
 
 ROOT_DIR = Path(__file__).parent
@@ -69,18 +69,18 @@ async def root():
 # Rotas para orações
 @api_router.post("/prayers", response_model=dict)
 async def add_prayer(prayer: PrayerEntryCreate):
-    """Adiciona uma nova entrada de oração na planilha do Google Sheets"""
+    """Adiciona uma nova entrada de oração"""
     try:
-        success = await sheets_service.add_prayer_entry(
+        result = google_forms.submit_prayer(
             name=prayer.name,
-            time=prayer.time,
+            time_minutes=prayer.time,
             unit=prayer.unit
         )
         
-        if success:
+        if result["success"]:
             return {"message": "Oração registrada com sucesso!", "success": True}
         else:
-            raise HTTPException(status_code=500, detail="Erro ao registrar oração")
+            raise HTTPException(status_code=500, detail=result["message"])
             
     except Exception as e:
         logging.error(f"Erro ao adicionar oração: {e}")
@@ -88,10 +88,10 @@ async def add_prayer(prayer: PrayerEntryCreate):
 
 @api_router.get("/prayers", response_model=List[dict])
 async def get_prayers():
-    """Recupera todas as entradas de oração da planilha"""
+    """Recupera todas as entradas de oração"""
     try:
-        entries = await sheets_service.get_prayer_entries()
-        return entries
+        prayers = google_forms.get_prayers()
+        return prayers
     except Exception as e:
         logging.error(f"Erro ao recuperar orações: {e}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -100,18 +100,12 @@ async def get_prayers():
 async def get_prayer_stats():
     """Calcula estatísticas das orações"""
     try:
-        total_hours = await sheets_service.calculate_total_hours()
-        entries = await sheets_service.get_prayer_entries()
-        total_entries = len(entries)
-        
-        # Meta de 1000 horas
-        goal_hours = 1000
-        progress_percentage = min((total_hours / goal_hours) * 100, 100)
+        stats = google_forms.get_stats()
         
         return PrayerStats(
-            total_hours=total_hours,
-            total_entries=total_entries,
-            progress_percentage=progress_percentage
+            total_hours=stats["total_hours"],
+            total_entries=stats["total_prayers"],
+            progress_percentage=stats["progress_percentage"]
         )
     except Exception as e:
         logging.error(f"Erro ao calcular estatísticas: {e}")
