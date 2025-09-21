@@ -39,49 +39,49 @@ const CountdownTimer = () => {
   }, []);
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-gray-200">
-      <div className="text-center mb-6">
+    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 sm:p-8 shadow-xl border border-gray-200">
+      <div className="text-center mb-4 sm:mb-6">
         <div className="inline-flex items-center gap-2 mb-2">
-          <Calendar className="w-6 h-6 text-emerald-600" />
-          <h2 className="text-2xl font-bold text-gray-800">Tempo Restante</h2>
+          <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600" />
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Tempo Restante</h2>
         </div>
-        <p className="text-gray-600">Para nossa meta de 1000 horas</p>
+        <p className="text-sm sm:text-base text-gray-600">Para nossa meta de 1000 horas</p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
         <div className="text-center">
-          <div className="bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-xl p-4 shadow-lg">
-            <div className="text-3xl md:text-4xl font-bold mb-1">{timeLeft.days}</div>
-            <div className="text-sm opacity-90">Dias</div>
+          <div className="bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-lg">
+            <div className="text-xl sm:text-3xl md:text-4xl font-bold mb-1">{timeLeft.days}</div>
+            <div className="text-xs sm:text-sm opacity-90">Dias</div>
           </div>
         </div>
         
         <div className="text-center">
-          <div className="bg-gradient-to-br from-teal-500 to-cyan-600 text-white rounded-xl p-4 shadow-lg">
-            <div className="text-3xl md:text-4xl font-bold mb-1">{timeLeft.hours}</div>
-            <div className="text-sm opacity-90">Horas</div>
+          <div className="bg-gradient-to-br from-teal-500 to-cyan-600 text-white rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-lg">
+            <div className="text-xl sm:text-3xl md:text-4xl font-bold mb-1">{timeLeft.hours}</div>
+            <div className="text-xs sm:text-sm opacity-90">Horas</div>
           </div>
         </div>
         
         <div className="text-center">
-          <div className="bg-gradient-to-br from-cyan-500 to-blue-600 text-white rounded-xl p-4 shadow-lg">
-            <div className="text-3xl md:text-4xl font-bold mb-1">{timeLeft.minutes}</div>
-            <div className="text-sm opacity-90">Minutos</div>
+          <div className="bg-gradient-to-br from-cyan-500 to-blue-600 text-white rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-lg">
+            <div className="text-xl sm:text-3xl md:text-4xl font-bold mb-1">{timeLeft.minutes}</div>
+            <div className="text-xs sm:text-sm opacity-90">Minutos</div>
           </div>
         </div>
         
         <div className="text-center">
-          <div className="bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-xl p-4 shadow-lg">
-            <div className="text-3xl md:text-4xl font-bold mb-1">{timeLeft.seconds}</div>
-            <div className="text-sm opacity-90">Segundos</div>
+          <div className="bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-lg">
+            <div className="text-xl sm:text-3xl md:text-4xl font-bold mb-1">{timeLeft.seconds}</div>
+            <div className="text-xs sm:text-sm opacity-90">Segundos</div>
           </div>
         </div>
       </div>
 
-      <div className="mt-6 text-center">
+      <div className="mt-4 sm:mt-6 text-center">
         <div className="inline-flex items-center gap-2 text-gray-600">
-          <Clock className="w-4 h-4" />
-          <span className="text-sm">Atualizado em tempo real</span>
+          <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
+          <span className="text-xs sm:text-sm">Atualizado em tempo real</span>
         </div>
       </div>
     </div>
