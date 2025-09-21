@@ -64,6 +64,15 @@ const PrayerSystem = () => {
       <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-12">
+          {/* Logo da Igreja Videira */}
+          <div className="flex justify-center mb-4 sm:mb-6">
+            <img 
+              src="/logo-igreja-videira.png" 
+              alt="Logo Igreja Videira" 
+              className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full shadow-lg border-2 border-white/50 hover:scale-105 transition-transform duration-300"
+            />
+          </div>
+          
           <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4 flex-wrap">
             <Heart className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-600" />
             <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-600 via-teal-600 to-purple-600 bg-clip-text text-transparent text-center leading-tight">
