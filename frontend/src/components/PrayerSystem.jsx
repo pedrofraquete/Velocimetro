@@ -10,10 +10,61 @@ import { Toaster } from '../components/ui/toaster';
 const PrayerSystem = () => {
   const [totalHours, setTotalHours] = useState(0);
   const [prayers, setPrayers] = useState([]);
+  const [totalEntries, setTotalEntries] = useState(0);
+  const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
-  // Load data from localStorage on component mount
+  // API base URL
+  const API_BASE_URL = process.env.NODE_ENV === 'production' 
+    ? '/api' 
+    : 'http://localhost:8000/api';
+
+  // Load data from API on component mount
   useEffect(() => {
+    loadPrayerStats();
+    loadPrayerHistory();
+  }, []);
+
+  const loadPrayerStats = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/prayers/stats`);
+      if (response.ok) {
+        const stats = await response.json();
+        setTotalHours(stats.total_hours);
+        setTotalEntries(stats.total_entries);
+      } else {
+        // Fallback para localStorage se API não estiver disponível
+        loadFromLocalStorage();
+      }
+    } catch (error) {
+      console.error('Erro ao carregar estatísticas:', error);
+      loadFromLocalStorage();
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loadPrayerHistory = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/prayers`);
+      if (response.ok) {
+        const prayerData = await response.json();
+        // Converter formato da API para formato do frontend
+        const formattedPrayers = prayerData.map((prayer, index) => ({
+          id: `api-${index}`,
+          name: prayer.name,
+          time: prayer.time,
+          timeUnit: prayer.unit === 'horas' ? 'hours' : 'minutes',
+          timestamp: prayer.timestamp || new Date().toISOString()
+        }));
+        setPrayers(formattedPrayers.slice(0, 10)); // Mostrar apenas os últimos 10
+      }
+    } catch (error) {
+      console.error('Erro ao carregar histórico:', error);
+    }
+  };
+
+  const loadFromLocalStorage = () => {
     const savedPrayers = localStorage.getItem('prayers');
     if (savedPrayers) {
       const parsedPrayers = JSON.parse(savedPrayers);
@@ -25,36 +76,74 @@ const PrayerSystem = () => {
         return acc + hours;
       }, 0);
       setTotalHours(total);
+      setTotalEntries(parsedPrayers.length);
     }
-  }, []);
+  };
 
-  // Save prayers to localStorage whenever prayers state changes
-  useEffect(() => {
-    if (prayers.length > 0) {
-      localStorage.setItem('prayers', JSON.stringify(prayers));
+  const addPrayer = async (prayer) => {
+    try {
+      // Preparar dados para API
+      const prayerData = {
+        name: prayer.name,
+        time: prayer.time,
+        unit: prayer.timeUnit === 'hours' ? 'horas' : 'minutos'
+      };
+
+      // Enviar para API
+      const response = await fetch(`${API_BASE_URL}/prayers`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(prayerData),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        
+        // Recarregar dados da API
+        await loadPrayerStats();
+        await loadPrayerHistory();
+
+        // Show success toast
+        toast({
+          title: "Oração registrada!",
+          description: `${prayer.time} ${prayer.timeUnit === 'hours' ? 'horas' : 'minutos'} adicionadas ao total.`,
+          duration: 3000,
+        });
+      } else {
+        throw new Error('Erro ao registrar oração na API');
+      }
+    } catch (error) {
+      console.error('Erro ao adicionar oração:', error);
+      
+      // Fallback para localStorage
+      const newPrayer = {
+        ...prayer,
+        id: Date.now().toString(),
+        timestamp: new Date().toISOString(),
+      };
+
+      // Calculate hours to add
+      const hoursToAdd = prayer.timeUnit === 'hours' ? prayer.time : prayer.time / 60;
+      setTotalHours(prev => prev + hoursToAdd);
+      setTotalEntries(prev => prev + 1);
+
+      // Add prayer to the beginning of the array and keep only last 10
+      setPrayers(prev => [newPrayer, ...prev.slice(0, 9)]);
+
+      // Save to localStorage as backup
+      const updatedPrayers = [newPrayer, ...prayers.slice(0, 9)];
+      localStorage.setItem('prayers', JSON.stringify(updatedPrayers));
+
+      // Show warning toast
+      toast({
+        title: "Oração registrada localmente",
+        description: `${prayer.time} ${prayer.timeUnit === 'hours' ? 'horas' : 'minutos'} adicionadas. Dados salvos localmente.`,
+        duration: 3000,
+        variant: "destructive"
+      });
     }
-  }, [prayers]);
-
-  const addPrayer = (prayer) => {
-    const newPrayer = {
-      ...prayer,
-      id: Date.now().toString(),
-      timestamp: new Date().toISOString(),
-    };
-
-    // Calculate hours to add
-    const hoursToAdd = prayer.timeUnit === 'hours' ? prayer.time : prayer.time / 60;
-    setTotalHours(prev => prev + hoursToAdd);
-
-    // Add prayer to the beginning of the array and keep only last 10
-    setPrayers(prev => [newPrayer, ...prev.slice(0, 9)]);
-
-    // Show success toast
-    toast({
-      title: "Oração registrada!",
-      description: `${prayer.time} ${prayer.timeUnit === 'hours' ? 'horas' : 'minutos'} adicionadas ao total.`,
-      duration: 3000,
-    });
   };
 
   const progressPercentage = Math.min((totalHours / 1000) * 100, 100);
@@ -100,8 +189,8 @@ const PrayerSystem = () => {
               <Users className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600" />
               <h3 className="font-semibold text-gray-800 text-sm sm:text-base">Orações Registradas</h3>
             </div>
-            <p className="text-2xl sm:text-3xl font-bold text-teal-700">{prayers.length}</p>
-            <p className="text-xs sm:text-sm text-gray-600">pessoas oraram</p>
+            <p className="text-2xl sm:text-3xl font-bold text-teal-700">{totalEntries}</p>
+            <p className="text-xs sm:text-sm text-gray-600">orações registradas</p>
           </div>
           
           <div className="bg-white/70 backdrop-blur-sm rounded-xl p-4 sm:p-6 shadow-lg border border-purple-100">
