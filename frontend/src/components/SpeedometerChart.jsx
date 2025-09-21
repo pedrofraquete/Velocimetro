@@ -119,36 +119,34 @@ const SpeedometerChart = ({ totalHours }) => {
   }, [totalHours]);
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-gray-200">
-      <div className="text-center mb-6">
+    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 sm:p-8 shadow-xl border border-gray-200">
+      <div className="text-center mb-4 sm:mb-6">
         <div className="inline-flex items-center gap-2 mb-2">
-          <TrendingUp className="w-6 h-6 text-emerald-600" />
-          <h2 className="text-2xl font-bold text-gray-800">Progresso das Orações</h2>
+          <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600" />
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Progresso das Orações</h2>
         </div>
-        <p className="text-gray-600">Velocímetro de horas acumuladas</p>
+        <p className="text-sm sm:text-base text-gray-600">Velocímetro de horas acumuladas</p>
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center overflow-hidden">
         <canvas
           ref={canvasRef}
-          width={400}
-          height={250}
           className="max-w-full h-auto"
         />
       </div>
 
-      <div className="flex justify-center mt-4">
-        <div className="flex items-center gap-6 text-sm">
+      <div className="flex justify-center mt-2 sm:mt-4">
+        <div className="flex items-center gap-3 sm:gap-6 text-xs sm:text-sm flex-wrap justify-center">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+            <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
             <span className="text-gray-600">0-300h</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+            <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
             <span className="text-gray-600">300-700h</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+            <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
             <span className="text-gray-600">700-1000h</span>
           </div>
         </div>
