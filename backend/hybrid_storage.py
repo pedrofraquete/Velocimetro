@@ -220,7 +220,7 @@ class HybridStorage:
     def create_backup(self) -> Dict:
         """Criar backup dos dados"""
         try:
-            backup_file = f"/home/ubuntu/Velocimetro/backup_orações_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+            backup_file = f"/app/backup_orações_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
             
             prayers = self.get_all_prayers()
             stats = self.get_prayer_stats()
