@@ -217,7 +217,72 @@ class HybridStorage:
         except Exception as e:
             return {"success": False, "error": str(e)}
     
-    def create_backup(self) -> Dict:
+    def update_prayer(self, prayer_id: str, updates: Dict) -> bool:
+        """Atualizar uma oração específica"""
+        try:
+            # Tentar Supabase primeiro
+            if self.supabase_available and self.supabase_manager:
+                result = self.supabase_manager.update_prayer(prayer_id, updates)
+                if result.get("success"):
+                    return True
+            
+            # Fallback para armazenamento local
+            data = self._load_local_data()
+            prayers = data.get("prayers", [])
+            
+            for prayer in prayers:
+                if str(prayer.get("timestamp")) == str(prayer_id) or str(prayer.get("id")) == str(prayer_id):
+                    # Atualizar campos
+                    prayer["name"] = updates.get("name", prayer.get("name"))
+                    prayer["time"] = updates.get("time", prayer.get("time"))
+                    prayer["unit"] = updates.get("unit", prayer.get("unit"))
+                    prayer["description"] = updates.get("description", prayer.get("description", ""))
+                    
+                    # Recalcular time_minutes se necessário
+                    if updates.get("unit") == "horas":
+                        prayer["time_minutes"] = updates.get("time", 0) * 60
+                    else:
+                        prayer["time_minutes"] = updates.get("time", 0)
+                    
+                    # Salvar alterações
+                    self._save_local_data(data)
+                    return True
+            
+            return False  # Oração não encontrada
+            
+        except Exception as e:
+            print(f"❌ Erro ao atualizar oração: {e}")
+            return False
+    
+    def delete_prayer(self, prayer_id: str) -> bool:
+        """Excluir uma oração específica"""
+        try:
+            # Tentar Supabase primeiro
+            if self.supabase_available and self.supabase_manager:
+                result = self.supabase_manager.delete_prayer(prayer_id)
+                if result.get("success"):
+                    return True
+            
+            # Fallback para armazenamento local
+            data = self._load_local_data()
+            prayers = data.get("prayers", [])
+            original_count = len(prayers)
+            
+            # Filtrar orações, removendo a que tem o ID especificado
+            prayers = [p for p in prayers if str(p.get("timestamp")) != str(prayer_id) and str(p.get("id")) != str(prayer_id)]
+            
+            if len(prayers) < original_count:
+                data["prayers"] = prayers
+                self._save_local_data(data)
+                return True
+            
+            return False  # Oração não encontrada
+            
+        except Exception as e:
+            print(f"❌ Erro ao excluir oração: {e}")
+            return False
+
+    def create_backup(self):
         """Criar backup dos dados"""
         try:
             backup_file = f"/home/ubuntu/Velocimetro/backup_orações_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"

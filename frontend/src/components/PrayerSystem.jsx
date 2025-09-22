@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Clock, Heart, Users } from 'lucide-react';
+import { Clock, Heart, Users, Settings } from 'lucide-react';
 import CountdownTimer from './CountdownTimer';
 import SpeedometerChart from './SpeedometerChart';
 import PrayerForm from './PrayerForm';
@@ -151,6 +151,17 @@ const PrayerSystem = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50">
       <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8 max-w-6xl">
+        {/* Settings Icon */}
+        <div className="flex justify-end mb-4">
+          <button
+            onClick={() => window.location.href = '/admin'}
+            className="p-2 rounded-full bg-white/70 backdrop-blur-sm shadow-lg border border-gray-200 hover:bg-white/90 hover:scale-105 transition-all duration-300 group"
+            title="Configurações"
+          >
+            <Settings className="w-5 h-5 text-gray-600 group-hover:text-emerald-600 transition-colors duration-300" />
+          </button>
+        </div>
+        
         {/* Header */}
         <div className="text-center mb-6 sm:mb-12">
           {/* Logo da Igreja Videira */}

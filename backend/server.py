@@ -178,6 +178,49 @@ async def create_backup():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.put("/api/prayers/{prayer_id}")
+async def update_prayer(prayer_id: str, prayer: PrayerRequest):
+    """Atualizar uma oração específica"""
+    try:
+        success = storage.update_prayer(prayer_id, {
+            "name": prayer.name,
+            "time": prayer.time,
+            "unit": prayer.unit,
+            "description": prayer.description
+        })
+        
+        if success:
+            return PrayerResponse(
+                success=True,
+                message="Oração atualizada com sucesso",
+                data={"id": prayer_id}
+            )
+        else:
+            raise HTTPException(status_code=404, detail="Oração não encontrada")
+            
+    except Exception as e:
+        print(f"❌ Erro ao atualizar oração: {e}")
+        raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
+
+@app.delete("/api/prayers/{prayer_id}")
+async def delete_prayer(prayer_id: str):
+    """Excluir uma oração específica"""
+    try:
+        success = storage.delete_prayer(prayer_id)
+        
+        if success:
+            return PrayerResponse(
+                success=True,
+                message="Oração excluída com sucesso",
+                data={"id": prayer_id}
+            )
+        else:
+            raise HTTPException(status_code=404, detail="Oração não encontrada")
+            
+    except Exception as e:
+        print(f"❌ Erro ao excluir oração: {e}")
+        raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
+
 @app.get("/api/health")
 async def health_check():
     """Verificar saúde do sistema"""
