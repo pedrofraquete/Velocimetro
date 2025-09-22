@@ -10,6 +10,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<PrayerSystem />} />
+          <Route path="/admin" element={<AdminPanel />} />
         </Routes>
       </BrowserRouter>
     </div>
