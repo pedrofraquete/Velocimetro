@@ -14,9 +14,8 @@ const AdminPanel = () => {
   const { toast } = useToast();
 
   // API base URL
-  const API_BASE_URL = process.env.NODE_ENV === 'production' 
-    ? '/api' 
-    : 'http://localhost:8001/api';
+  const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || 
+    (process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:8001/api');
 
   // Verificar autenticação
   const handleLogin = () => {
