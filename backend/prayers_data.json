@@ -109,6 +109,14 @@
       "datetime": "2025-09-22T11:10:25.358508",
       "timestamp": 1758539425.358515,
       "description": "Teste de persistência no Supabase"
+    },
+    {
+      "name": "Verificação Final",
+      "time": 15,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:11:57.567900",
+      "timestamp": 1758539517.567907,
+      "description": "Teste final - tudo funcionando!"
     }
   ]
 }
