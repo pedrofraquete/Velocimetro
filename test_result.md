@@ -107,11 +107,11 @@ user_problem_statement: "verifica se as oracoes estao sendo salvas corretamente 
 backend:
   - task: "Verificar conexão com Supabase"
     implemented: true
-    working: false
+    working: true
     file: "supabase_client.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: false
         agent: "main"
@@ -119,6 +119,9 @@ backend:
       - working: false
         agent: "testing"
         comment: "CONFIRMADO: Supabase não configurado. Variáveis SUPABASE_URL e SUPABASE_KEY não encontradas no ambiente. Sistema híbrido detecta corretamente a ausência e usa armazenamento local como fallback. Endpoint /api/sync retorna erro esperado 'Supabase não disponível'."
+      - working: true
+        agent: "main"
+        comment: "✅ SUPABASE CONFIGURADO E FUNCIONANDO! Credenciais adicionadas, biblioteca instalada, conexão testada com sucesso. Tabela 'prayers' encontrada. Sistema agora usa Supabase como armazenamento primário."
 
   - task: "Sistema de armazenamento híbrido funcionando"
     implemented: true
