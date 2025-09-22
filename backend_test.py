@@ -692,10 +692,29 @@ class PrayerSystemTester:
         self.test_get_stats()
         self.test_recent_prayers()
         
-        # Testes de funcionalidade
+        # Testes de funcionalidade básica
         self.test_add_prayer()
         
+        # 🆕 TESTES DE ADMINISTRAÇÃO - NOVOS ENDPOINTS
+        print("\n🔧 TESTANDO FUNCIONALIDADES ADMINISTRATIVAS...")
+        self.test_update_prayer_endpoint()
+        self.test_delete_prayer_endpoint()
+        
+        # Testes de edge cases
+        print("\n⚠️  TESTANDO CASOS EXTREMOS...")
+        self.test_update_nonexistent_prayer()
+        self.test_delete_nonexistent_prayer()
+        
+        # Teste de workflow completo
+        print("\n🔄 TESTANDO WORKFLOW CRUD COMPLETO...")
+        self.test_full_crud_workflow()
+        
+        # Teste de integridade de dados
+        print("\n📊 TESTANDO INTEGRIDADE DE ESTATÍSTICAS...")
+        self.test_stats_after_operations()
+        
         # Testes de integração
+        print("\n🔗 TESTANDO INTEGRAÇÕES...")
         self.test_supabase_sync()
         self.test_backup_creation()
         
@@ -714,13 +733,24 @@ class PrayerSystemTester:
             for failure in failures:
                 print(f"   • {failure['test']}: {failure['message']}")
         
+        # Mostrar sucessos administrativos
+        admin_tests = [r for r in self.test_results if any(keyword in r["test"] for keyword in ["Update", "Delete", "CRUD"])]
+        admin_successes = [r for r in admin_tests if "✅" in r["status"]]
+        
+        if admin_successes:
+            print(f"\n✅ FUNCIONALIDADES ADMINISTRATIVAS FUNCIONANDO ({len(admin_successes)}):")
+            for success in admin_successes:
+                print(f"   • {success['test']}: {success['message']}")
+        
         return {
             "total_tests": self.total_tests,
             "passed_tests": self.passed_tests,
             "failed_tests": self.total_tests - self.passed_tests,
             "success_rate": (self.passed_tests/self.total_tests)*100,
             "results": self.test_results,
-            "failures": failures
+            "failures": failures,
+            "admin_tests": admin_tests,
+            "admin_successes": admin_successes
         }
 
 if __name__ == "__main__":
