@@ -216,6 +216,9 @@ test_plan:
     - "Verificar configuração Supabase" # ✅ COMPLETO
     - "Testar salvamento de orações" # ✅ COMPLETO  
     - "Validar sistema híbrido" # ✅ COMPLETO
+    - "Testar funcionalidades administrativas" # ✅ COMPLETO
+    - "Validar CRUD completo" # ✅ COMPLETO
+    - "Verificar integração Supabase" # ✅ COMPLETO
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
