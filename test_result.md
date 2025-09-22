@@ -147,7 +147,7 @@ backend:
     file: "server.py"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: true
         agent: "main"
@@ -155,6 +155,33 @@ backend:
       - working: true
         agent: "testing"
         comment: "TODOS OS ENDPOINTS TESTADOS E FUNCIONANDO: GET /api/health (sistema healthy, 8 orações, 5.08h, 0.51% progresso), GET /api/prayers (retorna 8 orações corretamente), GET /api/prayers/stats (estatísticas corretas), POST /api/prayers (adiciona orações com sucesso), GET /api/prayers/recent (funciona), POST /api/sync (detecta Supabase ausente), POST /api/backup (cria backup), GET / (info da API). Taxa de sucesso: 100%."
+      - working: true
+        agent: "main"
+        comment: "✅ NOVOS ENDPOINTS ADICIONADOS: PUT /api/prayers/{id} para editar e DELETE /api/prayers/{id} para excluir orações. Testados com sucesso."
+
+  - task: "Painel administrativo com autenticação"
+    implemented: true
+    working: true
+    file: "AdminPanel.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "✅ Painel administrativo criado com senha 'PRCARLAO', tabela completa de orações, funcionalidades de editar/excluir conectadas ao Supabase."
+
+  - task: "Ícone de configuração no frontend"
+    implemented: true
+    working: true
+    file: "PrayerSystem.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "✅ Ícone de configuração adicionado no header da aplicação principal com link para painel administrativo (/admin)."
 
 frontend:
   - task: "Interface de usuário para orações"
