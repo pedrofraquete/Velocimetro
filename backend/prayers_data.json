@@ -45,6 +45,14 @@
       "datetime": "2025-09-21T16:58:29.210968",
       "timestamp": 1758488309.210979,
       "description": "Testando sistema híbrido"
+    },
+    {
+      "name": "Teste Pós-Supabase",
+      "time": 20,
+      "unit": "minutos",
+      "datetime": "2025-09-22T06:51:26.642085",
+      "timestamp": 1758538286.642095,
+      "description": "Sistema funcionando perfeitamente"
     }
   ]
 }
