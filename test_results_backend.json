@@ -1,8 +1,8 @@
 {
   "total_tests": 16,
-  "passed_tests": 14,
-  "failed_tests": 2,
-  "success_rate": 87.5,
+  "passed_tests": 16,
+  "failed_tests": 0,
+  "success_rate": 100.0,
   "results": [
     {
       "test": "Root Endpoint",
@@ -17,64 +17,64 @@
         ],
         "storage_type": "supabase"
       },
-      "timestamp": "2025-09-22T11:21:49.690625"
+      "timestamp": "2025-09-22T11:23:17.610361"
     },
     {
       "test": "Health Endpoint",
       "status": "✅ PASS",
       "message": "Sistema healthy - Storage: supabase",
       "details": {
-        "total_prayers": 46,
-        "total_hours": 30.0,
-        "progress": "3.0%",
+        "total_prayers": 67,
+        "total_hours": 47.0,
+        "progress": "4.7%",
         "supabase_available": true
       },
-      "timestamp": "2025-09-22T11:21:49.893171"
+      "timestamp": "2025-09-22T11:23:17.760468"
     },
     {
       "test": "Local Data File",
       "status": "✅ PASS",
-      "message": "Arquivo local encontrado com 15 orações",
+      "message": "Arquivo local encontrado com 19 orações",
       "details": {
         "file_path": "/app/backend/prayers_data.json",
-        "prayer_count": 15,
+        "prayer_count": 19,
         "sample_names": [
           "Teste Novo Sistema",
           "Teste Final Sistema",
           "Pedro Fraquete"
         ]
       },
-      "timestamp": "2025-09-22T11:21:49.893479"
+      "timestamp": "2025-09-22T11:23:17.760777"
     },
     {
       "test": "Get Prayers",
       "status": "✅ PASS",
-      "message": "Encontradas 46 orações - Storage: supabase",
+      "message": "Encontradas 67 orações - Storage: supabase",
       "details": {
-        "count": 46,
+        "count": 67,
         "sample_prayer": {
-          "id": 46,
-          "name": "Verificação Final",
-          "time": 15,
+          "id": 69,
+          "name": "Teste Estatísticas",
+          "time": 120,
           "unit": "minutos",
-          "datetime": "2025-09-22T11:11:57.502031+00:00",
-          "description": "Teste final - tudo funcionando!",
-          "created_at": "2025-09-22T11:11:57.541447+00:00",
+          "datetime": "2025-09-22T11:21:53.034866+00:00",
+          "description": "Oração para testar atualização de estatísticas",
+          "created_at": "2025-09-22T11:21:53.065085+00:00",
           "source": "supabase"
         },
         "storage_type": "supabase"
       },
-      "timestamp": "2025-09-22T11:21:49.957955"
+      "timestamp": "2025-09-22T11:23:17.852939"
     },
     {
       "test": "Prayer Stats",
       "status": "✅ PASS",
-      "message": "Stats: 46 orações, 30.0h (3.0%)",
+      "message": "Stats: 67 orações, 47.0h (4.7%)",
       "details": {
-        "total_hours": 30.0,
-        "total_entries": 46,
-        "progress_percentage": 3.0,
-        "remaining_hours": 970.0,
+        "total_hours": 47.0,
+        "total_entries": 67,
+        "progress_percentage": 4.7,
+        "remaining_hours": 953.0,
         "storage_info": {
           "supabase_available": true,
           "primary_storage": "supabase",
@@ -82,27 +82,27 @@
           "supabase_url": "https://ulthrzqgvobultkxlruk.supabase.co..."
         }
       },
-      "timestamp": "2025-09-22T11:21:50.022440"
+      "timestamp": "2025-09-22T11:23:17.998698"
     },
     {
       "test": "Recent Prayers",
       "status": "✅ PASS",
-      "message": "Últimas 5 de 46 orações",
+      "message": "Últimas 5 de 67 orações",
       "details": {
         "recent_count": 5,
-        "total_prayers": 46,
+        "total_prayers": 67,
         "latest_prayer": {
-          "id": 46,
-          "name": "Verificação Final",
-          "time": 15,
+          "id": 69,
+          "name": "Teste Estatísticas",
+          "time": 120,
           "unit": "minutos",
-          "datetime": "2025-09-22T11:11:57.502031+00:00",
-          "description": "Teste final - tudo funcionando!",
-          "created_at": "2025-09-22T11:11:57.541447+00:00",
+          "datetime": "2025-09-22T11:21:53.034866+00:00",
+          "description": "Oração para testar atualização de estatísticas",
+          "created_at": "2025-09-22T11:21:53.065085+00:00",
           "source": "supabase"
         }
       },
-      "timestamp": "2025-09-22T11:21:50.083556"
+      "timestamp": "2025-09-22T11:23:18.076875"
     },
     {
       "test": "Add Prayer",
@@ -110,87 +110,87 @@
       "message": "Oração adicionada: Maria Silva - 45 minutos",
       "details": {
         "added_prayer": {
-          "id": 47,
+          "id": 70,
           "name": "Maria Silva",
           "time_minutes": 45,
           "unit": "minutos",
-          "datetime": "2025-09-22T11:21:50.085562+00:00",
+          "datetime": "2025-09-22T11:23:18.078953+00:00",
           "description": "Oração de intercessão pela família",
-          "created_at": "2025-09-22T11:21:50.119321+00:00",
-          "updated_at": "2025-09-22T11:21:50.119321+00:00"
+          "created_at": "2025-09-22T11:23:18.127806+00:00",
+          "updated_at": "2025-09-22T11:23:18.127806+00:00"
         },
         "storage": "unknown"
       },
-      "timestamp": "2025-09-22T11:21:50.155846"
+      "timestamp": "2025-09-22T11:23:18.165774"
     },
     {
       "test": "Update Prayer",
       "status": "✅ PASS",
-      "message": "Oração ID 47 atualizada: João Santos (Atualizado) - 60 minutos",
+      "message": "Oração ID 70 atualizada: João Santos (Atualizado) - 60 minutos",
       "details": {
-        "prayer_id": 47,
+        "prayer_id": 70,
         "updated_name": "João Santos (Atualizado)",
         "updated_time": 60,
         "original_name": "Maria Silva"
       },
-      "timestamp": "2025-09-22T11:21:50.316414"
+      "timestamp": "2025-09-22T11:23:18.322740"
     },
     {
       "test": "Delete Prayer",
       "status": "✅ PASS",
-      "message": "Oração ID 48 excluída com sucesso: Teste Para Exclusão",
+      "message": "Oração ID 71 excluída com sucesso: Teste Para Exclusão",
       "details": {
-        "deleted_prayer_id": 48,
+        "deleted_prayer_id": 71,
         "deleted_name": "Teste Para Exclusão",
         "deleted_time": 30
       },
-      "timestamp": "2025-09-22T11:21:50.610342"
+      "timestamp": "2025-09-22T11:23:19.049614"
     },
     {
       "test": "Delete Prayer - Verification",
       "status": "✅ PASS",
-      "message": "Confirmado: Oração ID 48 não aparece mais na listagem",
+      "message": "Confirmado: Oração ID 71 não aparece mais na listagem",
       "details": null,
-      "timestamp": "2025-09-22T11:21:50.696457"
+      "timestamp": "2025-09-22T11:23:19.140025"
     },
     {
       "test": "Update Nonexistent Prayer",
-      "status": "❌ FAIL",
-      "message": "Erro inesperado: 404: Atualização só disponível com Supabase",
+      "status": "✅ PASS",
+      "message": "Corretamente detectou oração inexistente: 404: Oração não encontrada",
       "details": null,
-      "timestamp": "2025-09-22T11:21:50.761079"
+      "timestamp": "2025-09-22T11:23:19.224871"
     },
     {
       "test": "Delete Nonexistent Prayer",
-      "status": "❌ FAIL",
-      "message": "Erro inesperado: 404: Exclusão só disponível com Supabase",
+      "status": "✅ PASS",
+      "message": "Corretamente detectou oração inexistente: 404: Oração não encontrada",
       "details": null,
-      "timestamp": "2025-09-22T11:21:50.830532"
+      "timestamp": "2025-09-22T11:23:19.314376"
     },
     {
       "test": "CRUD Workflow Complete",
       "status": "✅ PASS",
       "message": "Workflow CRUD completo executado com sucesso: CREATE → READ → UPDATE → DELETE → VERIFY",
       "details": {
-        "prayer_id": 49,
+        "prayer_id": 72,
         "original_name": "Ana Costa - CRUD Test",
         "updated_name": "Ana Costa - CRUD Test (Atualizada)",
         "final_status": "excluída com sucesso"
       },
-      "timestamp": "2025-09-22T11:21:51.340579"
+      "timestamp": "2025-09-22T11:23:19.880971"
     },
     {
       "test": "Stats After Operations",
       "status": "✅ PASS",
-      "message": "Estatísticas atualizadas corretamente: 47→48 orações, 31.00→33.00h",
+      "message": "Estatísticas atualizadas corretamente: 68→69 orações, 48.00→50.00h",
       "details": {
-        "initial_count": 47,
-        "new_count": 48,
-        "initial_hours": 31.0,
-        "new_hours": 33.0,
+        "initial_count": 68,
+        "new_count": 69,
+        "initial_hours": 48.0,
+        "new_hours": 50.0,
         "hours_added": 2.0
       },
-      "timestamp": "2025-09-22T11:21:51.554713"
+      "timestamp": "2025-09-22T11:23:20.117340"
     },
     {
       "test": "Supabase Sync",
@@ -201,141 +201,140 @@
         "message": "Sincronização concluída",
         "data": {
           "success": true,
-          "migrated_count": 19,
-          "total_local": 19,
+          "migrated_count": 23,
+          "total_local": 23,
           "errors": []
         }
       },
-      "timestamp": "2025-09-22T11:21:53.090774"
+      "timestamp": "2025-09-22T11:23:21.972476"
     },
     {
       "test": "Backup Creation",
       "status": "✅ PASS",
-      "message": "Backup criado com Backup criado com 67 orações",
+      "message": "Backup criado com Backup criado com 92 orações",
       "details": {
         "success": true,
-        "file": "/app/backup_orações_20250922_112153.json",
-        "count": 67
+        "file": "/app/backup_orações_20250922_112321.json",
+        "count": 92
       },
-      "timestamp": "2025-09-22T11:21:53.325787"
+      "timestamp": "2025-09-22T11:23:22.128751"
     }
   ],
-  "failures": [
-    {
-      "test": "Update Nonexistent Prayer",
-      "status": "❌ FAIL",
-      "message": "Erro inesperado: 404: Atualização só disponível com Supabase",
-      "details": null,
-      "timestamp": "2025-09-22T11:21:50.761079"
-    },
-    {
-      "test": "Delete Nonexistent Prayer",
-      "status": "❌ FAIL",
-      "message": "Erro inesperado: 404: Exclusão só disponível com Supabase",
-      "details": null,
-      "timestamp": "2025-09-22T11:21:50.830532"
-    }
-  ],
+  "failures": [],
   "admin_tests": [
     {
       "test": "Update Prayer",
       "status": "✅ PASS",
-      "message": "Oração ID 47 atualizada: João Santos (Atualizado) - 60 minutos",
+      "message": "Oração ID 70 atualizada: João Santos (Atualizado) - 60 minutos",
       "details": {
-        "prayer_id": 47,
+        "prayer_id": 70,
         "updated_name": "João Santos (Atualizado)",
         "updated_time": 60,
         "original_name": "Maria Silva"
       },
-      "timestamp": "2025-09-22T11:21:50.316414"
+      "timestamp": "2025-09-22T11:23:18.322740"
     },
     {
       "test": "Delete Prayer",
       "status": "✅ PASS",
-      "message": "Oração ID 48 excluída com sucesso: Teste Para Exclusão",
+      "message": "Oração ID 71 excluída com sucesso: Teste Para Exclusão",
       "details": {
-        "deleted_prayer_id": 48,
+        "deleted_prayer_id": 71,
         "deleted_name": "Teste Para Exclusão",
         "deleted_time": 30
       },
-      "timestamp": "2025-09-22T11:21:50.610342"
+      "timestamp": "2025-09-22T11:23:19.049614"
     },
     {
       "test": "Delete Prayer - Verification",
       "status": "✅ PASS",
-      "message": "Confirmado: Oração ID 48 não aparece mais na listagem",
+      "message": "Confirmado: Oração ID 71 não aparece mais na listagem",
       "details": null,
-      "timestamp": "2025-09-22T11:21:50.696457"
+      "timestamp": "2025-09-22T11:23:19.140025"
     },
     {
       "test": "Update Nonexistent Prayer",
-      "status": "❌ FAIL",
-      "message": "Erro inesperado: 404: Atualização só disponível com Supabase",
+      "status": "✅ PASS",
+      "message": "Corretamente detectou oração inexistente: 404: Oração não encontrada",
       "details": null,
-      "timestamp": "2025-09-22T11:21:50.761079"
+      "timestamp": "2025-09-22T11:23:19.224871"
     },
     {
       "test": "Delete Nonexistent Prayer",
-      "status": "❌ FAIL",
-      "message": "Erro inesperado: 404: Exclusão só disponível com Supabase",
+      "status": "✅ PASS",
+      "message": "Corretamente detectou oração inexistente: 404: Oração não encontrada",
       "details": null,
-      "timestamp": "2025-09-22T11:21:50.830532"
+      "timestamp": "2025-09-22T11:23:19.314376"
     },
     {
       "test": "CRUD Workflow Complete",
       "status": "✅ PASS",
       "message": "Workflow CRUD completo executado com sucesso: CREATE → READ → UPDATE → DELETE → VERIFY",
       "details": {
-        "prayer_id": 49,
+        "prayer_id": 72,
         "original_name": "Ana Costa - CRUD Test",
         "updated_name": "Ana Costa - CRUD Test (Atualizada)",
         "final_status": "excluída com sucesso"
       },
-      "timestamp": "2025-09-22T11:21:51.340579"
+      "timestamp": "2025-09-22T11:23:19.880971"
     }
   ],
   "admin_successes": [
     {
       "test": "Update Prayer",
       "status": "✅ PASS",
-      "message": "Oração ID 47 atualizada: João Santos (Atualizado) - 60 minutos",
+      "message": "Oração ID 70 atualizada: João Santos (Atualizado) - 60 minutos",
       "details": {
-        "prayer_id": 47,
+        "prayer_id": 70,
         "updated_name": "João Santos (Atualizado)",
         "updated_time": 60,
         "original_name": "Maria Silva"
       },
-      "timestamp": "2025-09-22T11:21:50.316414"
+      "timestamp": "2025-09-22T11:23:18.322740"
     },
     {
       "test": "Delete Prayer",
       "status": "✅ PASS",
-      "message": "Oração ID 48 excluída com sucesso: Teste Para Exclusão",
+      "message": "Oração ID 71 excluída com sucesso: Teste Para Exclusão",
       "details": {
-        "deleted_prayer_id": 48,
+        "deleted_prayer_id": 71,
         "deleted_name": "Teste Para Exclusão",
         "deleted_time": 30
       },
-      "timestamp": "2025-09-22T11:21:50.610342"
+      "timestamp": "2025-09-22T11:23:19.049614"
     },
     {
       "test": "Delete Prayer - Verification",
       "status": "✅ PASS",
-      "message": "Confirmado: Oração ID 48 não aparece mais na listagem",
+      "message": "Confirmado: Oração ID 71 não aparece mais na listagem",
       "details": null,
-      "timestamp": "2025-09-22T11:21:50.696457"
+      "timestamp": "2025-09-22T11:23:19.140025"
+    },
+    {
+      "test": "Update Nonexistent Prayer",
+      "status": "✅ PASS",
+      "message": "Corretamente detectou oração inexistente: 404: Oração não encontrada",
+      "details": null,
+      "timestamp": "2025-09-22T11:23:19.224871"
+    },
+    {
+      "test": "Delete Nonexistent Prayer",
+      "status": "✅ PASS",
+      "message": "Corretamente detectou oração inexistente: 404: Oração não encontrada",
+      "details": null,
+      "timestamp": "2025-09-22T11:23:19.314376"
     },
     {
       "test": "CRUD Workflow Complete",
       "status": "✅ PASS",
       "message": "Workflow CRUD completo executado com sucesso: CREATE → READ → UPDATE → DELETE → VERIFY",
       "details": {
-        "prayer_id": 49,
+        "prayer_id": 72,
         "original_name": "Ana Costa - CRUD Test",
         "updated_name": "Ana Costa - CRUD Test (Atualizada)",
         "final_status": "excluída com sucesso"
       },
-      "timestamp": "2025-09-22T11:21:51.340579"
+      "timestamp": "2025-09-22T11:23:19.880971"
     }
   ]
 }

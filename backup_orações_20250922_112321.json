@@ -1,0 +1,944 @@
+{
+  "backup_date": "2025-09-22T11:23:22.126556",
+  "storage_info": {
+    "supabase_available": true,
+    "primary_storage": "supabase",
+    "backup_storage": "local",
+    "supabase_url": "https://ulthrzqgvobultkxlruk.supabase.co..."
+  },
+  "statistics": {
+    "total_prayers": 92,
+    "total_minutes": 4080,
+    "total_hours": 68.0,
+    "progress_percentage": 6.8,
+    "remaining_hours": 932.0,
+    "storage_info": {
+      "supabase_available": true,
+      "primary_storage": "supabase",
+      "backup_storage": "local",
+      "supabase_url": "https://ulthrzqgvobultkxlruk.supabase.co..."
+    }
+  },
+  "prayers": [
+    {
+      "id": 96,
+      "name": "Teste Estatísticas",
+      "time": 120,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:21.906718+00:00",
+      "description": "Oração para testar atualização de estatísticas",
+      "created_at": "2025-09-22T11:23:21.944287+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 95,
+      "name": "Ana Costa - CRUD Test",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:21.834126+00:00",
+      "description": "Oração para teste completo CRUD",
+      "created_at": "2025-09-22T11:23:21.880111+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 94,
+      "name": "Teste Para Exclusão",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:21.769726+00:00",
+      "description": "Oração criada apenas para teste de exclusão",
+      "created_at": "2025-09-22T11:23:21.809494+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 93,
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:21.678598+00:00",
+      "description": "Oração de intercessão pela família",
+      "created_at": "2025-09-22T11:23:21.733818+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 92,
+      "name": "Teste Estatísticas",
+      "time": 120,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:21.592314+00:00",
+      "description": "Oração para testar atualização de estatísticas",
+      "created_at": "2025-09-22T11:23:21.63987+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 91,
+      "name": "Ana Costa - CRUD Test",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:21.506689+00:00",
+      "description": "Oração para teste completo CRUD",
+      "created_at": "2025-09-22T11:23:21.555973+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 90,
+      "name": "Teste Para Exclusão",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:21.437967+00:00",
+      "description": "Oração criada apenas para teste de exclusão",
+      "created_at": "2025-09-22T11:23:21.478408+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 89,
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:21.364226+00:00",
+      "description": "Oração de intercessão pela família",
+      "created_at": "2025-09-22T11:23:21.406526+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 88,
+      "name": "Verificação Final",
+      "time": 15,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:21.298105+00:00",
+      "description": "Teste final - tudo funcionando!",
+      "created_at": "2025-09-22T11:23:21.338214+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 87,
+      "name": "Teste Persistência",
+      "time": 25,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:21.214824+00:00",
+      "description": "Teste de persistência no Supabase",
+      "created_at": "2025-09-22T11:23:21.26381+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 86,
+      "name": "Carlos Oliveira",
+      "time": 90,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:21.125115+00:00",
+      "description": "Oração de gratidão e louvor",
+      "created_at": "2025-09-22T11:23:21.178336+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 85,
+      "name": "Ana Costa",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:21.053612+00:00",
+      "description": "Intercessão pelos missionários",
+      "created_at": "2025-09-22T11:23:21.097418+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 84,
+      "name": "João Santos",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:20.989081+00:00",
+      "description": "Oração pela igreja local",
+      "created_at": "2025-09-22T11:23:21.028135+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 83,
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:20.908965+00:00",
+      "description": "Oração de intercessão pela família",
+      "created_at": "2025-09-22T11:23:20.953945+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 82,
+      "name": "Teste Supabase",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:20.843038+00:00",
+      "description": "Verificação da integração com Supabase",
+      "created_at": "2025-09-22T11:23:20.880599+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 81,
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:20.772317+00:00",
+      "description": "Oração de intercessão pela família",
+      "created_at": "2025-09-22T11:23:20.81469+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 80,
+      "name": "Teste Pós-Supabase",
+      "time": 20,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:20.707305+00:00",
+      "description": "Sistema funcionando perfeitamente",
+      "created_at": "2025-09-22T11:23:20.747037+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 79,
+      "name": "Teste Supabase Híbrido",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:20.623818+00:00",
+      "description": "Testando sistema híbrido",
+      "created_at": "2025-09-22T11:23:20.67144+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 78,
+      "name": "Teste Sistema Híbrido",
+      "time": 15,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:20.529563+00:00",
+      "description": "Teste de funcionamento",
+      "created_at": "2025-09-22T11:23:20.58336+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 77,
+      "name": "Luara",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:20.440475+00:00",
+      "description": "Nova!",
+      "created_at": "2025-09-22T11:23:20.494434+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 76,
+      "name": "Pedro Fraquete",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:20.375296+00:00",
+      "description": "Devocional",
+      "created_at": "2025-09-22T11:23:20.413674+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 75,
+      "name": "Teste Final Sistema",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:20.288201+00:00",
+      "description": "",
+      "created_at": "2025-09-22T11:23:20.337527+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 74,
+      "name": "Teste Novo Sistema",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:20.196664+00:00",
+      "description": "",
+      "created_at": "2025-09-22T11:23:20.247603+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 73,
+      "name": "Teste Estatísticas",
+      "time": 120,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:19.953733+00:00",
+      "description": "Oração para testar atualização de estatísticas",
+      "created_at": "2025-09-22T11:23:19.999041+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 70,
+      "name": "João Santos (Atualizado)",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:18.078953+00:00",
+      "description": "Oração de gratidão atualizada via teste",
+      "created_at": "2025-09-22T11:23:18.127806+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 69,
+      "name": "Teste Estatísticas",
+      "time": 120,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:53.034866+00:00",
+      "description": "Oração para testar atualização de estatísticas",
+      "created_at": "2025-09-22T11:21:53.065085+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 68,
+      "name": "Ana Costa - CRUD Test",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:52.973055+00:00",
+      "description": "Oração para teste completo CRUD",
+      "created_at": "2025-09-22T11:21:53.007594+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 67,
+      "name": "Teste Para Exclusão",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:52.883176+00:00",
+      "description": "Oração criada apenas para teste de exclusão",
+      "created_at": "2025-09-22T11:21:52.925921+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 66,
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:52.82004+00:00",
+      "description": "Oração de intercessão pela família",
+      "created_at": "2025-09-22T11:21:52.857073+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 65,
+      "name": "Verificação Final",
+      "time": 15,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:52.740633+00:00",
+      "description": "Teste final - tudo funcionando!",
+      "created_at": "2025-09-22T11:21:52.780556+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 64,
+      "name": "Teste Persistência",
+      "time": 25,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:52.682366+00:00",
+      "description": "Teste de persistência no Supabase",
+      "created_at": "2025-09-22T11:21:52.716529+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 63,
+      "name": "Carlos Oliveira",
+      "time": 90,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:52.61982+00:00",
+      "description": "Oração de gratidão e louvor",
+      "created_at": "2025-09-22T11:21:52.653974+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 62,
+      "name": "Ana Costa",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:52.560415+00:00",
+      "description": "Intercessão pelos missionários",
+      "created_at": "2025-09-22T11:21:52.593145+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 61,
+      "name": "João Santos",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:52.490543+00:00",
+      "description": "Oração pela igreja local",
+      "created_at": "2025-09-22T11:21:52.530806+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 60,
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:52.419422+00:00",
+      "description": "Oração de intercessão pela família",
+      "created_at": "2025-09-22T11:21:52.455834+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 59,
+      "name": "Teste Supabase",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:52.363549+00:00",
+      "description": "Verificação da integração com Supabase",
+      "created_at": "2025-09-22T11:21:52.394797+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 58,
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:52.280928+00:00",
+      "description": "Oração de intercessão pela família",
+      "created_at": "2025-09-22T11:21:52.320789+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 57,
+      "name": "Teste Pós-Supabase",
+      "time": 20,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:52.205981+00:00",
+      "description": "Sistema funcionando perfeitamente",
+      "created_at": "2025-09-22T11:21:52.245555+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 56,
+      "name": "Teste Supabase Híbrido",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:52.071484+00:00",
+      "description": "Testando sistema híbrido",
+      "created_at": "2025-09-22T11:21:52.178679+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 55,
+      "name": "Teste Sistema Híbrido",
+      "time": 15,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:52.000342+00:00",
+      "description": "Teste de funcionamento",
+      "created_at": "2025-09-22T11:21:52.031785+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 54,
+      "name": "Luara",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:51.924937+00:00",
+      "description": "Nova!",
+      "created_at": "2025-09-22T11:21:51.96466+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 53,
+      "name": "Pedro Fraquete",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:51.850559+00:00",
+      "description": "Devocional",
+      "created_at": "2025-09-22T11:21:51.890561+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 52,
+      "name": "Teste Final Sistema",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:51.781667+00:00",
+      "description": "",
+      "created_at": "2025-09-22T11:21:51.815684+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 51,
+      "name": "Teste Novo Sistema",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:51.706288+00:00",
+      "description": "",
+      "created_at": "2025-09-22T11:21:51.747514+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 50,
+      "name": "Teste Estatísticas",
+      "time": 120,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:51.402326+00:00",
+      "description": "Oração para testar atualização de estatísticas",
+      "created_at": "2025-09-22T11:21:51.443255+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 47,
+      "name": "João Santos (Atualizado)",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:50.085562+00:00",
+      "description": "Oração de gratidão atualizada via teste",
+      "created_at": "2025-09-22T11:21:50.119321+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 46,
+      "name": "Verificação Final",
+      "time": 15,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:11:57.502031+00:00",
+      "description": "Teste final - tudo funcionando!",
+      "created_at": "2025-09-22T11:11:57.541447+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 45,
+      "name": "Teste Persistência",
+      "time": 25,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:28.362536+00:00",
+      "description": "Teste de persistência no Supabase",
+      "created_at": "2025-09-22T11:10:28.404688+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 44,
+      "name": "Carlos Oliveira",
+      "time": 90,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:28.167766+00:00",
+      "description": "Oração de gratidão e louvor",
+      "created_at": "2025-09-22T11:10:28.320911+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 43,
+      "name": "Ana Costa",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:28.103302+00:00",
+      "description": "Intercessão pelos missionários",
+      "created_at": "2025-09-22T11:10:28.140655+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 42,
+      "name": "João Santos",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:28.017071+00:00",
+      "description": "Oração pela igreja local",
+      "created_at": "2025-09-22T11:10:28.067582+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 41,
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:27.842125+00:00",
+      "description": "Oração de intercessão pela família",
+      "created_at": "2025-09-22T11:10:27.980238+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 40,
+      "name": "Teste Supabase",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:27.721388+00:00",
+      "description": "Verificação da integração com Supabase",
+      "created_at": "2025-09-22T11:10:27.815208+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 39,
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:27.655857+00:00",
+      "description": "Oração de intercessão pela família",
+      "created_at": "2025-09-22T11:10:27.696642+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 38,
+      "name": "Teste Pós-Supabase",
+      "time": 20,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:27.586557+00:00",
+      "description": "Sistema funcionando perfeitamente",
+      "created_at": "2025-09-22T11:10:27.624432+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 37,
+      "name": "Teste Supabase Híbrido",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:27.451512+00:00",
+      "description": "Testando sistema híbrido",
+      "created_at": "2025-09-22T11:10:27.560727+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 36,
+      "name": "Teste Sistema Híbrido",
+      "time": 15,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:27.260787+00:00",
+      "description": "Teste de funcionamento",
+      "created_at": "2025-09-22T11:10:27.410461+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 35,
+      "name": "Luara",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:27.137004+00:00",
+      "description": "Nova!",
+      "created_at": "2025-09-22T11:10:27.234258+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 34,
+      "name": "Pedro Fraquete",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:27.00603+00:00",
+      "description": "Devocional",
+      "created_at": "2025-09-22T11:10:27.108683+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 33,
+      "name": "Teste Final Sistema",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:26.873549+00:00",
+      "description": "",
+      "created_at": "2025-09-22T11:10:26.977911+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 32,
+      "name": "Teste Novo Sistema",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:26.725643+00:00",
+      "description": "",
+      "created_at": "2025-09-22T11:10:26.845532+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 31,
+      "name": "Teste Persistência",
+      "time": 25,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:25.205869+00:00",
+      "description": "Teste de persistência no Supabase",
+      "created_at": "2025-09-22T11:10:25.323926+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 30,
+      "name": "Carlos Oliveira",
+      "time": 90,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:24.689744+00:00",
+      "description": "Oração de gratidão e louvor",
+      "created_at": "2025-09-22T11:10:24.792125+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 29,
+      "name": "Ana Costa",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:24.562505+00:00",
+      "description": "Intercessão pelos missionários",
+      "created_at": "2025-09-22T11:10:24.660084+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 28,
+      "name": "João Santos",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:24.411828+00:00",
+      "description": "Oração pela igreja local",
+      "created_at": "2025-09-22T11:10:24.522213+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 27,
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:09:20.531117+00:00",
+      "description": "Oração de intercessão pela família",
+      "created_at": "2025-09-22T11:09:20.666005+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 26,
+      "name": "Teste Supabase",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:09:20.41132+00:00",
+      "description": "Verificação da integração com Supabase",
+      "created_at": "2025-09-22T11:09:20.503489+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 25,
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:09:20.250174+00:00",
+      "description": "Oração de intercessão pela família",
+      "created_at": "2025-09-22T11:09:20.368029+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 24,
+      "name": "Teste Pós-Supabase",
+      "time": 20,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:09:20.190852+00:00",
+      "description": "Sistema funcionando perfeitamente",
+      "created_at": "2025-09-22T11:09:20.224522+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 23,
+      "name": "Teste Supabase Híbrido",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:09:20.076756+00:00",
+      "description": "Testando sistema híbrido",
+      "created_at": "2025-09-22T11:09:20.165179+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 22,
+      "name": "Teste Sistema Híbrido",
+      "time": 15,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:09:20.020711+00:00",
+      "description": "Teste de funcionamento",
+      "created_at": "2025-09-22T11:09:20.051331+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 21,
+      "name": "Luara",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:09:19.890332+00:00",
+      "description": "Nova!",
+      "created_at": "2025-09-22T11:09:19.991299+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 20,
+      "name": "Pedro Fraquete",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:09:19.734286+00:00",
+      "description": "Devocional",
+      "created_at": "2025-09-22T11:09:19.859183+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 19,
+      "name": "Teste Final Sistema",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:09:19.552002+00:00",
+      "description": "",
+      "created_at": "2025-09-22T11:09:19.695865+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 18,
+      "name": "Teste Novo Sistema",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:09:19.416967+00:00",
+      "description": "",
+      "created_at": "2025-09-22T11:09:19.516652+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 17,
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:09:19.147229+00:00",
+      "description": "Oração de intercessão pela família",
+      "created_at": "2025-09-22T11:09:19.253563+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 16,
+      "name": "Teste Supabase",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:07:36.867358+00:00",
+      "description": "Verificação da integração com Supabase",
+      "created_at": "2025-09-22T11:07:36.897839+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 15,
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:07:36.630608+00:00",
+      "description": "Oração de intercessão pela família",
+      "created_at": "2025-09-22T11:07:36.748283+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 14,
+      "name": "Teste Pós-Supabase",
+      "time": 20,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:07:36.513439+00:00",
+      "description": "Sistema funcionando perfeitamente",
+      "created_at": "2025-09-22T11:07:36.608826+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 13,
+      "name": "Teste Supabase Híbrido",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:07:36.397228+00:00",
+      "description": "Testando sistema híbrido",
+      "created_at": "2025-09-22T11:07:36.486842+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 12,
+      "name": "Teste Sistema Híbrido",
+      "time": 15,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:07:36.219765+00:00",
+      "description": "Teste de funcionamento",
+      "created_at": "2025-09-22T11:07:36.373704+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 11,
+      "name": "Luara",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:07:36.087619+00:00",
+      "description": "Nova!",
+      "created_at": "2025-09-22T11:07:36.190421+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 10,
+      "name": "Pedro Fraquete",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:07:35.942315+00:00",
+      "description": "Devocional",
+      "created_at": "2025-09-22T11:07:36.049062+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 9,
+      "name": "Teste Final Sistema",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:07:35.844452+00:00",
+      "description": "",
+      "created_at": "2025-09-22T11:07:35.896865+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 8,
+      "name": "Teste Novo Sistema",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:07:35.705129+00:00",
+      "description": "",
+      "created_at": "2025-09-22T11:07:35.804305+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 7,
+      "name": "Teste Supabase",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:07:18.352834+00:00",
+      "description": "Verificação da integração com Supabase",
+      "created_at": "2025-09-22T11:07:18.553687+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 6,
+      "name": "Teste Supabase Híbrido",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-21T16:58:29+00:00",
+      "description": "Testando sistema híbrido",
+      "created_at": "2025-09-22T10:49:59.050961+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 5,
+      "name": "Teste Sistema Híbrido",
+      "time": 15,
+      "unit": "minutos",
+      "datetime": "2025-09-21T16:57:47+00:00",
+      "description": "Teste de funcionamento",
+      "created_at": "2025-09-22T10:49:59.050961+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 2,
+      "name": "Luara",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-21T12:50:00+00:00",
+      "description": "Nova!",
+      "created_at": "2025-09-22T10:49:59.050961+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 1,
+      "name": "Teste UPDATE",
+      "time": 25,
+      "unit": "minutos",
+      "datetime": "2025-09-21T12:40:00+00:00",
+      "description": "Oração atualizada via API",
+      "created_at": "2025-09-22T10:49:59.050961+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 4,
+      "name": "Teste Final Sistema",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-21T11:47:26+00:00",
+      "description": "Teste final",
+      "created_at": "2025-09-22T10:49:59.050961+00:00",
+      "source": "supabase"
+    },
+    {
+      "id": 3,
+      "name": "Teste Novo Sistema",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-21T11:45:35+00:00",
+      "description": "Teste de sistema",
+      "created_at": "2025-09-22T10:49:59.050961+00:00",
+      "source": "supabase"
+    }
+  ]
+}

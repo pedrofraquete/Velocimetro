@@ -149,6 +149,38 @@
       "datetime": "2025-09-22T11:21:51.471313",
       "timestamp": 1758540111.471321,
       "description": "Oração para testar atualização de estatísticas"
+    },
+    {
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:18.164227",
+      "timestamp": 1758540198.164235,
+      "description": "Oração de intercessão pela família"
+    },
+    {
+      "name": "Teste Para Exclusão",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:18.396961",
+      "timestamp": 1758540198.396968,
+      "description": "Oração criada apenas para teste de exclusão"
+    },
+    {
+      "name": "Ana Costa - CRUD Test",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:19.387846",
+      "timestamp": 1758540199.387852,
+      "description": "Oração para teste completo CRUD"
+    },
+    {
+      "name": "Teste Estatísticas",
+      "time": 120,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:20.032129",
+      "timestamp": 1758540200.03216,
+      "description": "Oração para testar atualização de estatísticas"
     }
   ]
 }
