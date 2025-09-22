@@ -163,7 +163,7 @@ const PrayerSystem = () => {
         {/* Header */}
         <div className="text-center mb-6 sm:mb-12 relative">
           {/* Ícone de Configuração */}
-          <div className="absolute top-0 right-0 sm:right-4">
+          <div className="absolute top-0 right-0 sm:right-4 z-10">
             <button
               onClick={() => navigate('/admin')}
               className="p-2 sm:p-3 bg-white/70 backdrop-blur-sm rounded-full shadow-lg border border-gray-200 hover:bg-white/90 hover:scale-110 transition-all duration-300 group"
