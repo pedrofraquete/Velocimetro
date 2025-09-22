@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Clock, Heart, Users } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import CountdownTimer from './CountdownTimer';
 import SpeedometerChart from './SpeedometerChart';
 import PrayerForm from './PrayerForm';
