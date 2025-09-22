@@ -53,16 +53,18 @@ const PrayerSystem = () => {
     try {
       const response = await fetch(`${API_BASE_URL}/prayers`);
       if (response.ok) {
-        const prayerData = await response.json();
-        // Converter formato da API para formato do frontend
-        const formattedPrayers = prayerData.map((prayer, index) => ({
-          id: `api-${index}`,
-          name: prayer.name,
-          time: prayer.time,
-          timeUnit: prayer.unit === 'horas' ? 'hours' : 'minutes',
-          timestamp: prayer.timestamp || new Date().toISOString()
-        }));
-        setPrayers(formattedPrayers.slice(0, 10)); // Mostrar apenas os últimos 10
+        const result = await response.json();
+        if (result.success && result.data) {
+          // Converter formato da API para formato do frontend
+          const formattedPrayers = result.data.map((prayer, index) => ({
+            id: `api-${index}`,
+            name: prayer.name,
+            time: prayer.time,
+            timeUnit: prayer.unit === 'horas' ? 'hours' : 'minutes',
+            timestamp: prayer.datetime || prayer.created_at || new Date().toISOString()
+          }));
+          setPrayers(formattedPrayers.slice(0, 10)); // Mostrar apenas os últimos 10
+        }
       }
     } catch (error) {
       console.error('Erro ao carregar histórico:', error);
