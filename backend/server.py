@@ -10,7 +10,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List
 import uvicorn
+import os
+from dotenv import load_dotenv
 from hybrid_storage import get_storage
+
+# Carregar variáveis de ambiente do arquivo .env
+load_dotenv()
 
 # Modelos Pydantic
 class PrayerRequest(BaseModel):
@@ -244,6 +249,48 @@ async def health_check():
             "error": str(e),
             "timestamp": "2025-09-21T21:00:00Z"
         }
+
+@app.put("/api/prayers/{prayer_id}")
+async def update_prayer(prayer_id: int, prayer: PrayerRequest):
+    """Atualizar uma oração existente"""
+    try:
+        result = storage.update_prayer(
+            prayer_id=prayer_id,
+            name=prayer.name,
+            time_minutes=prayer.time,
+            description=prayer.description,
+            unit=prayer.unit
+        )
+        
+        if result["success"]:
+            return PrayerResponse(
+                success=True,
+                message=f"Oração de {prayer.name} atualizada com sucesso!",
+                data=result.get("data")
+            )
+        else:
+            raise HTTPException(status_code=404, detail=result.get("error", "Oração não encontrada"))
+            
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.delete("/api/prayers/{prayer_id}")
+async def delete_prayer(prayer_id: int):
+    """Excluir uma oração"""
+    try:
+        result = storage.delete_prayer(prayer_id)
+        
+        if result["success"]:
+            return {
+                "success": True,
+                "message": "Oração excluída com sucesso!",
+                "data": result.get("data")
+            }
+        else:
+            raise HTTPException(status_code=404, detail=result.get("error", "Oração não encontrada"))
+            
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 # Manter compatibilidade com rotas antigas
 @app.get("/api/status")

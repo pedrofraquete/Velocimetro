@@ -1,0 +1,96 @@
+{
+  "backup_date": "2025-09-22T11:03:32.076570",
+  "storage_info": {
+    "supabase_available": false,
+    "primary_storage": "local",
+    "backup_storage": null,
+    "supabase_url": "não configurado"
+  },
+  "statistics": {
+    "total_prayers": 8,
+    "total_minutes": 305,
+    "total_hours": 5.08,
+    "progress_percentage": 0.51,
+    "remaining_hours": 994.92,
+    "storage_info": {
+      "supabase_available": false,
+      "primary_storage": "local",
+      "backup_storage": null,
+      "supabase_url": "não configurado"
+    }
+  },
+  "prayers": [
+    {
+      "name": "Teste Novo Sistema",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-21T11:45:35.532300",
+      "description": "",
+      "timestamp": 1758469535.532311,
+      "source": "local"
+    },
+    {
+      "name": "Teste Final Sistema",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-21T11:47:26.932060",
+      "description": "",
+      "timestamp": 1758469646.932078,
+      "source": "local"
+    },
+    {
+      "name": "Pedro Fraquete",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-21T12:40:00",
+      "description": "Devocional",
+      "timestamp": 1758472800.0,
+      "source": "local"
+    },
+    {
+      "name": "Luara",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-21T12:50:00",
+      "description": "Nova!",
+      "timestamp": 1758473400.0,
+      "source": "local"
+    },
+    {
+      "name": "Teste Sistema Híbrido",
+      "time": 15,
+      "unit": "minutos",
+      "datetime": "2025-09-21T16:57:47.123617",
+      "description": "Teste de funcionamento",
+      "timestamp": 1758488267.123633,
+      "source": "local"
+    },
+    {
+      "name": "Teste Supabase Híbrido",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-21T16:58:29.210968",
+      "description": "Testando sistema híbrido",
+      "timestamp": 1758488309.210979,
+      "source": "local"
+    },
+    {
+      "name": "Teste Pós-Supabase",
+      "time": 20,
+      "unit": "minutos",
+      "datetime": "2025-09-22T06:51:26.642085",
+      "description": "Sistema funcionando perfeitamente",
+      "timestamp": 1758538286.642095,
+      "source": "local"
+    },
+    {
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:03:32.071710",
+      "description": "Oração de intercessão pela família",
+      "timestamp": 1758539012.071717,
+      "source": "local"
+    }
+  ]
+}

@@ -53,6 +53,142 @@
       "datetime": "2025-09-22T06:51:26.642085",
       "timestamp": 1758538286.642095,
       "description": "Sistema funcionando perfeitamente"
+    },
+    {
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:03:32.071710",
+      "timestamp": 1758539012.071717,
+      "description": "Oração de intercessão pela família"
+    },
+    {
+      "name": "Teste Supabase",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:07:18.623537",
+      "timestamp": 1758539238.623545,
+      "description": "Verificação da integração com Supabase"
+    },
+    {
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:09:19.285062",
+      "timestamp": 1758539359.285069,
+      "description": "Oração de intercessão pela família"
+    },
+    {
+      "name": "João Santos",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:24.559020",
+      "timestamp": 1758539424.559027,
+      "description": "Oração pela igreja local"
+    },
+    {
+      "name": "Ana Costa",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:24.686322",
+      "timestamp": 1758539424.68633,
+      "description": "Intercessão pelos missionários"
+    },
+    {
+      "name": "Carlos Oliveira",
+      "time": 90,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:24.819501",
+      "timestamp": 1758539424.819508,
+      "description": "Oração de gratidão e louvor"
+    },
+    {
+      "name": "Teste Persistência",
+      "time": 25,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:25.358508",
+      "timestamp": 1758539425.358515,
+      "description": "Teste de persistência no Supabase"
+    },
+    {
+      "name": "Verificação Final",
+      "time": 15,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:11:57.567900",
+      "timestamp": 1758539517.567907,
+      "description": "Teste final - tudo funcionando!"
+    },
+    {
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:50.154512",
+      "timestamp": 1758540110.154518,
+      "description": "Oração de intercessão pela família"
+    },
+    {
+      "name": "Teste Para Exclusão",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:50.410244",
+      "timestamp": 1758540110.410252,
+      "description": "Oração criada apenas para teste de exclusão"
+    },
+    {
+      "name": "Ana Costa - CRUD Test",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:50.979958",
+      "timestamp": 1758540110.979965,
+      "description": "Oração para teste completo CRUD"
+    },
+    {
+      "name": "Teste Estatísticas",
+      "time": 120,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:21:51.471313",
+      "timestamp": 1758540111.471321,
+      "description": "Oração para testar atualização de estatísticas"
+    },
+    {
+      "name": "Maria Silva",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:18.164227",
+      "timestamp": 1758540198.164235,
+      "description": "Oração de intercessão pela família"
+    },
+    {
+      "name": "Teste Para Exclusão",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:18.396961",
+      "timestamp": 1758540198.396968,
+      "description": "Oração criada apenas para teste de exclusão"
+    },
+    {
+      "name": "Ana Costa - CRUD Test",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:19.387846",
+      "timestamp": 1758540199.387852,
+      "description": "Oração para teste completo CRUD"
+    },
+    {
+      "name": "Teste Estatísticas",
+      "time": 120,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:20.032129",
+      "timestamp": 1758540200.03216,
+      "description": "Oração para testar atualização de estatísticas"
+    },
+    {
+      "name": "Administrador Teste",
+      "time": 90,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:45.347907",
+      "timestamp": 1758540225.347915,
+      "description": "Oração criada para teste administrativo"
     }
   ]
 }

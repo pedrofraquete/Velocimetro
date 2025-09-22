@@ -4,6 +4,7 @@ import CountdownTimer from './CountdownTimer';
 import SpeedometerChart from './SpeedometerChart';
 import PrayerForm from './PrayerForm';
 import PrayerHistory from './PrayerHistory';
+import ConfigButton from './ConfigButton';
 import { useToast } from '../hooks/use-toast';
 import { Toaster } from '../components/ui/toaster';
 
@@ -15,9 +16,8 @@ const PrayerSystem = () => {
   const { toast } = useToast();
 
   // API base URL
-  const API_BASE_URL = process.env.NODE_ENV === 'production' 
-    ? '/api' 
-    : 'http://localhost:8000/api';
+  const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || 
+    (process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:8001/api');
 
   // Load data from API on component mount
   useEffect(() => {
@@ -29,9 +29,14 @@ const PrayerSystem = () => {
     try {
       const response = await fetch(`${API_BASE_URL}/prayers/stats`);
       if (response.ok) {
-        const stats = await response.json();
-        setTotalHours(stats.total_hours);
-        setTotalEntries(stats.total_entries);
+        const result = await response.json();
+        if (result.success && result.data) {
+          setTotalHours(result.data.total_hours || 0);
+          setTotalEntries(result.data.total_entries || 0);
+        } else {
+          // Fallback se não houver dados
+          loadFromLocalStorage();
+        }
       } else {
         // Fallback para localStorage se API não estiver disponível
         loadFromLocalStorage();
@@ -48,16 +53,18 @@ const PrayerSystem = () => {
     try {
       const response = await fetch(`${API_BASE_URL}/prayers`);
       if (response.ok) {
-        const prayerData = await response.json();
-        // Converter formato da API para formato do frontend
-        const formattedPrayers = prayerData.map((prayer, index) => ({
-          id: `api-${index}`,
-          name: prayer.name,
-          time: prayer.time,
-          timeUnit: prayer.unit === 'horas' ? 'hours' : 'minutes',
-          timestamp: prayer.timestamp || new Date().toISOString()
-        }));
-        setPrayers(formattedPrayers.slice(0, 10)); // Mostrar apenas os últimos 10
+        const result = await response.json();
+        if (result.success && result.data) {
+          // Converter formato da API para formato do frontend
+          const formattedPrayers = result.data.map((prayer, index) => ({
+            id: `api-${index}`,
+            name: prayer.name,
+            time: prayer.time,
+            timeUnit: prayer.unit === 'horas' ? 'hours' : 'minutes',
+            timestamp: prayer.datetime || prayer.created_at || new Date().toISOString()
+          }));
+          setPrayers(formattedPrayers.slice(0, 10)); // Mostrar apenas os últimos 10
+        }
       }
     } catch (error) {
       console.error('Erro ao carregar histórico:', error);
@@ -86,7 +93,8 @@ const PrayerSystem = () => {
       const prayerData = {
         name: prayer.name,
         time: prayer.time,
-        unit: prayer.timeUnit === 'hours' ? 'horas' : 'minutos'
+        unit: prayer.timeUnit === 'hours' ? 'horas' : 'minutos',
+        description: prayer.description || ''
       };
 
       // Enviar para API
@@ -163,7 +171,10 @@ const PrayerSystem = () => {
         </div>
         
         {/* Header */}
-        <div className="text-center mb-6 sm:mb-12">
+        <div className="text-center mb-6 sm:mb-12 relative">
+          {/* Ícone de Configuração */}
+          <ConfigButton />
+          
           {/* Logo da Igreja Videira */}
           <div className="flex justify-center mb-4 sm:mb-6">
             <img 
