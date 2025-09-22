@@ -10,7 +10,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List
 import uvicorn
+import os
+from dotenv import load_dotenv
 from hybrid_storage import get_storage
+
+# Carregar variáveis de ambiente do arquivo .env
+load_dotenv()
 
 # Modelos Pydantic
 class PrayerRequest(BaseModel):
