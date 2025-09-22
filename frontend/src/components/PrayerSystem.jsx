@@ -29,9 +29,14 @@ const PrayerSystem = () => {
     try {
       const response = await fetch(`${API_BASE_URL}/prayers/stats`);
       if (response.ok) {
-        const stats = await response.json();
-        setTotalHours(stats.total_hours);
-        setTotalEntries(stats.total_entries);
+        const result = await response.json();
+        if (result.success && result.data) {
+          setTotalHours(result.data.total_hours || 0);
+          setTotalEntries(result.data.total_entries || 0);
+        } else {
+          // Fallback se não houver dados
+          loadFromLocalStorage();
+        }
       } else {
         // Fallback para localStorage se API não estiver disponível
         loadFromLocalStorage();
