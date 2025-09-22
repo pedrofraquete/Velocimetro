@@ -1,8 +1,8 @@
 {
   "total_tests": 9,
-  "passed_tests": 7,
-  "failed_tests": 2,
-  "success_rate": 77.77777777777779,
+  "passed_tests": 9,
+  "failed_tests": 0,
+  "success_rate": 100.0,
   "results": [
     {
       "test": "Root Endpoint",
@@ -17,19 +17,19 @@
         ],
         "storage_type": "local"
       },
-      "timestamp": "2025-09-22T11:03:02.423755"
+      "timestamp": "2025-09-22T11:03:32.059636"
     },
     {
       "test": "Health Endpoint",
       "status": "✅ PASS",
       "message": "Sistema healthy - Storage: local",
       "details": {
-        "total_prayers": 0,
-        "total_hours": 0,
-        "progress": "0%",
+        "total_prayers": 7,
+        "total_hours": 4.33,
+        "progress": "0.43%",
         "supabase_available": false
       },
-      "timestamp": "2025-09-22T11:03:02.426588"
+      "timestamp": "2025-09-22T11:03:32.062453"
     },
     {
       "test": "Local Data File",
@@ -44,28 +44,36 @@
           "Pedro Fraquete"
         ]
       },
-      "timestamp": "2025-09-22T11:03:02.426851"
+      "timestamp": "2025-09-22T11:03:32.062695"
     },
     {
       "test": "Get Prayers",
       "status": "✅ PASS",
-      "message": "Encontradas 0 orações - Storage: local",
+      "message": "Encontradas 7 orações - Storage: local",
       "details": {
-        "count": 0,
-        "sample_prayer": null,
+        "count": 7,
+        "sample_prayer": {
+          "name": "Teste Novo Sistema",
+          "time": 60,
+          "unit": "minutos",
+          "datetime": "2025-09-21T11:45:35.532300",
+          "description": "",
+          "timestamp": 1758469535.532311,
+          "source": "local"
+        },
         "storage_type": "local"
       },
-      "timestamp": "2025-09-22T11:03:02.429116"
+      "timestamp": "2025-09-22T11:03:32.065186"
     },
     {
       "test": "Prayer Stats",
       "status": "✅ PASS",
-      "message": "Stats: 0 orações, 0h (0%)",
+      "message": "Stats: 7 orações, 4.33h (0.43%)",
       "details": {
-        "total_hours": 0,
-        "total_entries": 0,
-        "progress_percentage": 0,
-        "remaining_hours": 1000,
+        "total_hours": 4.33,
+        "total_entries": 7,
+        "progress_percentage": 0.43,
+        "remaining_hours": 995.67,
         "storage_info": {
           "supabase_available": false,
           "primary_storage": "local",
@@ -73,25 +81,43 @@
           "supabase_url": "não configurado"
         }
       },
-      "timestamp": "2025-09-22T11:03:02.433319"
+      "timestamp": "2025-09-22T11:03:32.067569"
     },
     {
       "test": "Recent Prayers",
       "status": "✅ PASS",
-      "message": "Últimas 0 de 0 orações",
+      "message": "Últimas 5 de 7 orações",
       "details": {
-        "recent_count": 0,
-        "total_prayers": 0,
-        "latest_prayer": null
+        "recent_count": 5,
+        "total_prayers": 7,
+        "latest_prayer": {
+          "name": "Teste Pós-Supabase",
+          "time": 20,
+          "unit": "minutos",
+          "datetime": "2025-09-22T06:51:26.642085",
+          "description": "Sistema funcionando perfeitamente",
+          "timestamp": 1758538286.642095,
+          "source": "local"
+        }
       },
-      "timestamp": "2025-09-22T11:03:02.435694"
+      "timestamp": "2025-09-22T11:03:32.069958"
     },
     {
       "test": "Add Prayer",
-      "status": "❌ FAIL",
-      "message": "Status code 500",
-      "details": "{\"detail\":\"500: [Errno 2] No such file or directory: '/home/ubuntu/Velocimetro/backend/prayers_data.json'\"}",
-      "timestamp": "2025-09-22T11:03:02.438309"
+      "status": "✅ PASS",
+      "message": "Oração adicionada: Maria Silva - 45 minutos",
+      "details": {
+        "added_prayer": {
+          "name": "Maria Silva",
+          "time": 45,
+          "unit": "minutos",
+          "datetime": "2025-09-22T11:03:32.071710",
+          "timestamp": 1758539012.071717,
+          "description": "Oração de intercessão pela família"
+        },
+        "storage": "unknown"
+      },
+      "timestamp": "2025-09-22T11:03:32.072682"
     },
     {
       "test": "Supabase Sync",
@@ -100,30 +126,19 @@
       "details": {
         "expected_behavior": "Supabase não configurado"
       },
-      "timestamp": "2025-09-22T11:03:02.440349"
+      "timestamp": "2025-09-22T11:03:32.074702"
     },
     {
       "test": "Backup Creation",
-      "status": "❌ FAIL",
-      "message": "Status code 500",
-      "details": "{\"detail\":\"500: [Errno 2] No such file or directory: '/home/ubuntu/Velocimetro/backup_orações_20250922_110302.json'\"}",
-      "timestamp": "2025-09-22T11:03:02.442537"
+      "status": "✅ PASS",
+      "message": "Backup criado com Backup criado com 8 orações",
+      "details": {
+        "success": true,
+        "file": "/app/backup_orações_20250922_110332.json",
+        "count": 8
+      },
+      "timestamp": "2025-09-22T11:03:32.077446"
     }
   ],
-  "failures": [
-    {
-      "test": "Add Prayer",
-      "status": "❌ FAIL",
-      "message": "Status code 500",
-      "details": "{\"detail\":\"500: [Errno 2] No such file or directory: '/home/ubuntu/Velocimetro/backend/prayers_data.json'\"}",
-      "timestamp": "2025-09-22T11:03:02.438309"
-    },
-    {
-      "test": "Backup Creation",
-      "status": "❌ FAIL",
-      "message": "Status code 500",
-      "details": "{\"detail\":\"500: [Errno 2] No such file or directory: '/home/ubuntu/Velocimetro/backup_orações_20250922_110302.json'\"}",
-      "timestamp": "2025-09-22T11:03:02.442537"
-    }
-  ]
+  "failures": []
 }
