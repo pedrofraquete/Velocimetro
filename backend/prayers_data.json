@@ -77,6 +77,38 @@
       "datetime": "2025-09-22T11:09:19.285062",
       "timestamp": 1758539359.285069,
       "description": "Oração de intercessão pela família"
+    },
+    {
+      "name": "João Santos",
+      "time": 60,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:24.559020",
+      "timestamp": 1758539424.559027,
+      "description": "Oração pela igreja local"
+    },
+    {
+      "name": "Ana Costa",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:24.686322",
+      "timestamp": 1758539424.68633,
+      "description": "Intercessão pelos missionários"
+    },
+    {
+      "name": "Carlos Oliveira",
+      "time": 90,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:24.819501",
+      "timestamp": 1758539424.819508,
+      "description": "Oração de gratidão e louvor"
+    },
+    {
+      "name": "Teste Persistência",
+      "time": 25,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:10:25.358508",
+      "timestamp": 1758539425.358515,
+      "description": "Teste de persistência no Supabase"
     }
   ]
 }
