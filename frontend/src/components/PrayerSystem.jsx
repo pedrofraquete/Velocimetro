@@ -17,7 +17,7 @@ const PrayerSystem = () => {
   // API base URL
   const API_BASE_URL = process.env.NODE_ENV === 'production' 
     ? '/api' 
-    : 'http://localhost:8000/api';
+    : 'http://localhost:8001/api';
 
   // Load data from API on component mount
   useEffect(() => {
