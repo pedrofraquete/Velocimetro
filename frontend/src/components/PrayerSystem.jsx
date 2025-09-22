@@ -165,9 +165,10 @@ const PrayerSystem = () => {
           {/* Ícone de Configuração */}
           <div className="absolute top-0 right-0 sm:right-4">
             <button
-              onClick={() => window.location.href = '/admin'}
+              onClick={() => navigate('/admin')}
               className="p-2 sm:p-3 bg-white/70 backdrop-blur-sm rounded-full shadow-lg border border-gray-200 hover:bg-white/90 hover:scale-110 transition-all duration-300 group"
               title="Configurações"
+              aria-label="Abrir painel administrativo"
             >
               <svg
                 className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600 group-hover:text-gray-800 group-hover:rotate-90 transition-all duration-300"
