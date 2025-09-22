@@ -246,7 +246,9 @@ class HybridStorage:
                 if result["success"]:
                     return result
                 else:
+                    # Propagar o erro específico do Supabase
                     print("⚠️  Falha no Supabase para exclusão")
+                    return result  # Retorna o erro específico do Supabase
             
             # Fallback para arquivo local (limitado - não suporta IDs específicos)
             return {"success": False, "error": "Exclusão só disponível com Supabase"}
