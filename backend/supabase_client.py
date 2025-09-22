@@ -233,6 +233,55 @@ CREATE POLICY "Allow public insert access" ON prayers
             print(f"❌ Erro de conexão com Supabase: {e}")
             return False
     
+    def update_prayer(self, prayer_id: int, name: str, time_minutes: int, description: str = "", unit: str = "minutos") -> Dict:
+        """Atualizar uma oração existente"""
+        try:
+            prayer_data = {
+                "name": name,
+                "time_minutes": time_minutes,
+                "unit": unit,
+                "description": description,
+                "updated_at": datetime.now().isoformat()
+            }
+            
+            result = self.supabase.table(self.table_name).update(prayer_data).eq("id", prayer_id).execute()
+            
+            if result.data:
+                print(f"✅ Oração ID {prayer_id} atualizada: {name} - {self._format_time(time_minutes)}")
+                return {"success": True, "data": result.data[0]}
+            else:
+                print(f"❌ Oração ID {prayer_id} não encontrada")
+                return {"success": False, "error": "Oração não encontrada"}
+                
+        except Exception as e:
+            print(f"❌ Erro ao atualizar oração: {e}")
+            return {"success": False, "error": str(e)}
+    
+    def delete_prayer(self, prayer_id: int) -> Dict:
+        """Excluir uma oração"""
+        try:
+            # Primeiro buscar a oração para logs
+            prayer_result = self.supabase.table(self.table_name).select("*").eq("id", prayer_id).execute()
+            
+            if not prayer_result.data:
+                return {"success": False, "error": "Oração não encontrada"}
+            
+            prayer_data = prayer_result.data[0]
+            
+            # Excluir a oração
+            result = self.supabase.table(self.table_name).delete().eq("id", prayer_id).execute()
+            
+            if result.data:
+                print(f"✅ Oração ID {prayer_id} excluída: {prayer_data['name']} - {self._format_time(prayer_data['time_minutes'])}")
+                return {"success": True, "data": prayer_data}
+            else:
+                print(f"❌ Falha ao excluir oração ID {prayer_id}")
+                return {"success": False, "error": "Falha na exclusão"}
+                
+        except Exception as e:
+            print(f"❌ Erro ao excluir oração: {e}")
+            return {"success": False, "error": str(e)}
+
     def backup_to_json(self, backup_file_path: str) -> Dict:
         """Fazer backup dos dados do Supabase para arquivo JSON"""
         try:
