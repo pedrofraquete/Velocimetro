@@ -29,6 +29,22 @@
       "datetime": "2025-09-21T12:50:00",
       "timestamp": 1758473400.0,
       "description": "Nova!"
+    },
+    {
+      "name": "Teste Sistema Híbrido",
+      "time": 15,
+      "unit": "minutos",
+      "datetime": "2025-09-21T16:57:47.123617",
+      "timestamp": 1758488267.123633,
+      "description": "Teste de funcionamento"
+    },
+    {
+      "name": "Teste Supabase Híbrido",
+      "time": 45,
+      "unit": "minutos",
+      "datetime": "2025-09-21T16:58:29.210968",
+      "timestamp": 1758488309.210979,
+      "description": "Testando sistema híbrido"
     }
   ]
 }

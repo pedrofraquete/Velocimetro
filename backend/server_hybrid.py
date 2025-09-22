@@ -2,13 +2,12 @@
 """
 Servidor FastAPI com sistema híbrido de armazenamento
 Funciona com Supabase quando disponível, fallback para JSON local
-Sistema de Orações - Igreja Videira
 """
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Optional
 import uvicorn
 from hybrid_storage import get_storage
 
@@ -23,11 +22,6 @@ class PrayerResponse(BaseModel):
     success: bool
     message: str
     data: Optional[dict] = None
-
-class PrayerStats(BaseModel):
-    total_hours: float
-    total_entries: int
-    progress_percentage: float
 
 # Inicializar FastAPI
 app = FastAPI(
@@ -95,22 +89,14 @@ async def get_prayers():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/api/prayers/stats", response_model=dict)
+@app.get("/api/prayers/stats")
 async def get_prayer_stats():
     """Obter estatísticas das orações"""
     try:
         stats = storage.get_prayer_stats()
-        
-        # Formato compatível com frontend
         return {
             "success": True,
-            "data": {
-                "total_hours": stats.get("total_hours", 0),
-                "total_entries": stats.get("total_prayers", 0),
-                "progress_percentage": stats.get("progress_percentage", 0),
-                "remaining_hours": stats.get("remaining_hours", 1000),
-                "storage_info": stats.get("storage_info", {})
-            }
+            "data": stats
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -193,27 +179,21 @@ async def health_check():
                 "total_hours": stats.get("total_hours", 0),
                 "progress": f"{stats.get('progress_percentage', 0)}%"
             },
-            "timestamp": "2025-09-21T21:00:00Z"
+            "timestamp": "2025-09-21T20:00:00Z"
         }
     except Exception as e:
         return {
             "status": "error",
             "error": str(e),
-            "timestamp": "2025-09-21T21:00:00Z"
+            "timestamp": "2025-09-21T20:00:00Z"
         }
-
-# Manter compatibilidade com rotas antigas
-@app.get("/api/status")
-async def get_status():
-    """Endpoint de compatibilidade"""
-    return await health_check()
 
 if __name__ == "__main__":
     print("🚀 Iniciando servidor híbrido...")
     print(f"📊 Storage info: {storage._get_storage_info()}")
     
     uvicorn.run(
-        "server:app",
+        "server_hybrid:app",
         host="0.0.0.0",
         port=8000,
         reload=True,
