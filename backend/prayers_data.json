@@ -181,6 +181,14 @@
       "datetime": "2025-09-22T11:23:20.032129",
       "timestamp": 1758540200.03216,
       "description": "Oração para testar atualização de estatísticas"
+    },
+    {
+      "name": "Administrador Teste",
+      "time": 90,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:23:45.347907",
+      "timestamp": 1758540225.347915,
+      "description": "Oração criada para teste administrativo"
     }
   ]
 }
