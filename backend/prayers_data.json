@@ -61,6 +61,14 @@
       "datetime": "2025-09-22T11:03:32.071710",
       "timestamp": 1758539012.071717,
       "description": "Oração de intercessão pela família"
+    },
+    {
+      "name": "Teste Supabase",
+      "time": 30,
+      "unit": "minutos",
+      "datetime": "2025-09-22T11:07:18.623537",
+      "timestamp": 1758539238.623545,
+      "description": "Verificação da integração com Supabase"
     }
   ]
 }
