@@ -245,6 +245,382 @@ class PrayerSystemTester:
         except Exception as e:
             self.log_test("Backup Creation", False, f"Erro de conexão: {str(e)}")
     
+    def test_update_prayer_endpoint(self):
+        """Testar endpoint PUT /api/prayers/{id} para atualizar oração"""
+        try:
+            # Primeiro, buscar uma oração existente para atualizar
+            response = requests.get(f"{self.base_url}/api/prayers", timeout=10)
+            
+            if response.status_code != 200:
+                self.log_test("Update Prayer - Get Existing", False, 
+                            f"Falha ao buscar orações existentes: {response.status_code}")
+                return
+            
+            data = response.json()
+            prayers = data.get("data", [])
+            
+            if not prayers:
+                self.log_test("Update Prayer", False, "Nenhuma oração encontrada para atualizar")
+                return
+            
+            # Pegar a primeira oração para atualizar
+            prayer_to_update = prayers[0]
+            prayer_id = prayer_to_update.get("id")
+            
+            if not prayer_id:
+                self.log_test("Update Prayer", False, "Oração sem ID encontrada")
+                return
+            
+            # Dados atualizados
+            updated_prayer = {
+                "name": "João Santos (Atualizado)",
+                "time": 60,
+                "unit": "minutos",
+                "description": "Oração de gratidão atualizada via teste"
+            }
+            
+            # Fazer a atualização
+            update_response = requests.put(f"{self.base_url}/api/prayers/{prayer_id}", 
+                                         json=updated_prayer, timeout=10)
+            
+            if update_response.status_code == 200:
+                update_data = update_response.json()
+                
+                if update_data.get("success"):
+                    updated_data = update_data.get("data", {})
+                    self.log_test("Update Prayer", True, 
+                                f"Oração ID {prayer_id} atualizada: {updated_prayer['name']} - {updated_prayer['time']} {updated_prayer['unit']}", 
+                                {
+                                    "prayer_id": prayer_id,
+                                    "updated_name": updated_data.get("name"),
+                                    "updated_time": updated_data.get("time_minutes"),
+                                    "original_name": prayer_to_update.get("name")
+                                })
+                else:
+                    self.log_test("Update Prayer", False, 
+                                f"Falha na atualização: {update_data.get('message', 'erro desconhecido')}", update_data)
+            else:
+                self.log_test("Update Prayer", False, 
+                            f"Status code {update_response.status_code}", update_response.text)
+                
+        except Exception as e:
+            self.log_test("Update Prayer", False, f"Erro de conexão: {str(e)}")
+    
+    def test_delete_prayer_endpoint(self):
+        """Testar endpoint DELETE /api/prayers/{id} para excluir oração"""
+        try:
+            # Primeiro, criar uma oração de teste para excluir
+            test_prayer = {
+                "name": "Teste Para Exclusão",
+                "time": 30,
+                "unit": "minutos",
+                "description": "Oração criada apenas para teste de exclusão"
+            }
+            
+            # Criar a oração
+            create_response = requests.post(f"{self.base_url}/api/prayers", 
+                                          json=test_prayer, timeout=10)
+            
+            if create_response.status_code != 200:
+                self.log_test("Delete Prayer - Create Test", False, 
+                            f"Falha ao criar oração de teste: {create_response.status_code}")
+                return
+            
+            create_data = create_response.json()
+            if not create_data.get("success"):
+                self.log_test("Delete Prayer - Create Test", False, 
+                            "Falha ao criar oração de teste", create_data)
+                return
+            
+            # Buscar a oração criada para obter o ID
+            prayers_response = requests.get(f"{self.base_url}/api/prayers", timeout=10)
+            if prayers_response.status_code != 200:
+                self.log_test("Delete Prayer - Find Test", False, 
+                            f"Falha ao buscar orações: {prayers_response.status_code}")
+                return
+            
+            prayers_data = prayers_response.json()
+            prayers = prayers_data.get("data", [])
+            
+            # Encontrar a oração de teste
+            test_prayer_id = None
+            for prayer in prayers:
+                if prayer.get("name") == test_prayer["name"]:
+                    test_prayer_id = prayer.get("id")
+                    break
+            
+            if not test_prayer_id:
+                self.log_test("Delete Prayer", False, "Oração de teste não encontrada após criação")
+                return
+            
+            # Excluir a oração
+            delete_response = requests.delete(f"{self.base_url}/api/prayers/{test_prayer_id}", timeout=10)
+            
+            if delete_response.status_code == 200:
+                delete_data = delete_response.json()
+                
+                if delete_data.get("success"):
+                    deleted_data = delete_data.get("data", {})
+                    self.log_test("Delete Prayer", True, 
+                                f"Oração ID {test_prayer_id} excluída com sucesso: {deleted_data.get('name', 'N/A')}", 
+                                {
+                                    "deleted_prayer_id": test_prayer_id,
+                                    "deleted_name": deleted_data.get("name"),
+                                    "deleted_time": deleted_data.get("time_minutes")
+                                })
+                    
+                    # Verificar se a oração foi realmente excluída
+                    verify_response = requests.get(f"{self.base_url}/api/prayers", timeout=10)
+                    if verify_response.status_code == 200:
+                        verify_data = verify_response.json()
+                        remaining_prayers = verify_data.get("data", [])
+                        
+                        # Verificar se a oração não está mais na lista
+                        prayer_still_exists = any(p.get("id") == test_prayer_id for p in remaining_prayers)
+                        
+                        if not prayer_still_exists:
+                            self.log_test("Delete Prayer - Verification", True, 
+                                        f"Confirmado: Oração ID {test_prayer_id} não aparece mais na listagem")
+                        else:
+                            self.log_test("Delete Prayer - Verification", False, 
+                                        f"ERRO: Oração ID {test_prayer_id} ainda aparece na listagem após exclusão")
+                else:
+                    self.log_test("Delete Prayer", False, 
+                                f"Falha na exclusão: {delete_data.get('message', 'erro desconhecido')}", delete_data)
+            else:
+                self.log_test("Delete Prayer", False, 
+                            f"Status code {delete_response.status_code}", delete_response.text)
+                
+        except Exception as e:
+            self.log_test("Delete Prayer", False, f"Erro de conexão: {str(e)}")
+    
+    def test_update_nonexistent_prayer(self):
+        """Testar atualização de oração que não existe (deve retornar 404)"""
+        try:
+            nonexistent_id = 99999
+            updated_prayer = {
+                "name": "Oração Inexistente",
+                "time": 45,
+                "unit": "minutos",
+                "description": "Esta oração não deveria ser atualizada"
+            }
+            
+            response = requests.put(f"{self.base_url}/api/prayers/{nonexistent_id}", 
+                                  json=updated_prayer, timeout=10)
+            
+            if response.status_code == 404:
+                self.log_test("Update Nonexistent Prayer", True, 
+                            f"Corretamente retornou 404 para oração inexistente ID {nonexistent_id}")
+            elif response.status_code == 500:
+                # Verificar se a mensagem de erro é apropriada
+                try:
+                    error_data = response.json()
+                    error_detail = error_data.get("detail", "")
+                    if "não encontrada" in error_detail.lower() or "not found" in error_detail.lower():
+                        self.log_test("Update Nonexistent Prayer", True, 
+                                    f"Corretamente detectou oração inexistente: {error_detail}")
+                    else:
+                        self.log_test("Update Nonexistent Prayer", False, 
+                                    f"Erro inesperado: {error_detail}")
+                except:
+                    self.log_test("Update Nonexistent Prayer", False, 
+                                f"Status 500 sem detalhes do erro: {response.text}")
+            else:
+                self.log_test("Update Nonexistent Prayer", False, 
+                            f"Status code inesperado {response.status_code} (esperado 404)", response.text)
+                
+        except Exception as e:
+            self.log_test("Update Nonexistent Prayer", False, f"Erro de conexão: {str(e)}")
+    
+    def test_delete_nonexistent_prayer(self):
+        """Testar exclusão de oração que não existe (deve retornar 404)"""
+        try:
+            nonexistent_id = 99999
+            
+            response = requests.delete(f"{self.base_url}/api/prayers/{nonexistent_id}", timeout=10)
+            
+            if response.status_code == 404:
+                self.log_test("Delete Nonexistent Prayer", True, 
+                            f"Corretamente retornou 404 para oração inexistente ID {nonexistent_id}")
+            elif response.status_code == 500:
+                # Verificar se a mensagem de erro é apropriada
+                try:
+                    error_data = response.json()
+                    error_detail = error_data.get("detail", "")
+                    if "não encontrada" in error_detail.lower() or "not found" in error_detail.lower():
+                        self.log_test("Delete Nonexistent Prayer", True, 
+                                    f"Corretamente detectou oração inexistente: {error_detail}")
+                    else:
+                        self.log_test("Delete Nonexistent Prayer", False, 
+                                    f"Erro inesperado: {error_detail}")
+                except:
+                    self.log_test("Delete Nonexistent Prayer", False, 
+                                f"Status 500 sem detalhes do erro: {response.text}")
+            else:
+                self.log_test("Delete Nonexistent Prayer", False, 
+                            f"Status code inesperado {response.status_code} (esperado 404)", response.text)
+                
+        except Exception as e:
+            self.log_test("Delete Nonexistent Prayer", False, f"Erro de conexão: {str(e)}")
+    
+    def test_full_crud_workflow(self):
+        """Testar workflow completo CRUD (Create, Read, Update, Delete)"""
+        try:
+            # 1. CREATE - Criar nova oração
+            test_prayer = {
+                "name": "Ana Costa - CRUD Test",
+                "time": 45,
+                "unit": "minutos",
+                "description": "Oração para teste completo CRUD"
+            }
+            
+            create_response = requests.post(f"{self.base_url}/api/prayers", 
+                                          json=test_prayer, timeout=10)
+            
+            if create_response.status_code != 200 or not create_response.json().get("success"):
+                self.log_test("CRUD Workflow - CREATE", False, 
+                            "Falha na criação da oração de teste")
+                return
+            
+            # 2. READ - Buscar a oração criada
+            read_response = requests.get(f"{self.base_url}/api/prayers", timeout=10)
+            
+            if read_response.status_code != 200:
+                self.log_test("CRUD Workflow - READ", False, 
+                            f"Falha ao buscar orações: {read_response.status_code}")
+                return
+            
+            prayers_data = read_response.json()
+            prayers = prayers_data.get("data", [])
+            
+            # Encontrar a oração criada
+            created_prayer = None
+            for prayer in prayers:
+                if prayer.get("name") == test_prayer["name"]:
+                    created_prayer = prayer
+                    break
+            
+            if not created_prayer:
+                self.log_test("CRUD Workflow - READ", False, 
+                            "Oração criada não encontrada na listagem")
+                return
+            
+            prayer_id = created_prayer.get("id")
+            
+            # 3. UPDATE - Atualizar a oração
+            updated_data = {
+                "name": "Ana Costa - CRUD Test (Atualizada)",
+                "time": 60,
+                "unit": "minutos",
+                "description": "Oração atualizada no teste CRUD"
+            }
+            
+            update_response = requests.put(f"{self.base_url}/api/prayers/{prayer_id}", 
+                                         json=updated_data, timeout=10)
+            
+            if update_response.status_code != 200 or not update_response.json().get("success"):
+                self.log_test("CRUD Workflow - UPDATE", False, 
+                            "Falha na atualização da oração")
+                return
+            
+            # 4. DELETE - Excluir a oração
+            delete_response = requests.delete(f"{self.base_url}/api/prayers/{prayer_id}", timeout=10)
+            
+            if delete_response.status_code != 200 or not delete_response.json().get("success"):
+                self.log_test("CRUD Workflow - DELETE", False, 
+                            "Falha na exclusão da oração")
+                return
+            
+            # 5. VERIFY - Verificar que foi excluída
+            verify_response = requests.get(f"{self.base_url}/api/prayers", timeout=10)
+            
+            if verify_response.status_code == 200:
+                verify_data = verify_response.json()
+                remaining_prayers = verify_data.get("data", [])
+                
+                prayer_still_exists = any(p.get("id") == prayer_id for p in remaining_prayers)
+                
+                if not prayer_still_exists:
+                    self.log_test("CRUD Workflow Complete", True, 
+                                f"Workflow CRUD completo executado com sucesso: CREATE → READ → UPDATE → DELETE → VERIFY", 
+                                {
+                                    "prayer_id": prayer_id,
+                                    "original_name": test_prayer["name"],
+                                    "updated_name": updated_data["name"],
+                                    "final_status": "excluída com sucesso"
+                                })
+                else:
+                    self.log_test("CRUD Workflow - VERIFY", False, 
+                                "Oração ainda existe após exclusão")
+            else:
+                self.log_test("CRUD Workflow - VERIFY", False, 
+                            "Falha na verificação final")
+                
+        except Exception as e:
+            self.log_test("CRUD Workflow", False, f"Erro no workflow CRUD: {str(e)}")
+    
+    def test_stats_after_operations(self):
+        """Testar se as estatísticas são atualizadas após operações CRUD"""
+        try:
+            # Obter estatísticas iniciais
+            initial_stats_response = requests.get(f"{self.base_url}/api/prayers/stats", timeout=10)
+            
+            if initial_stats_response.status_code != 200:
+                self.log_test("Stats After Operations", False, 
+                            "Falha ao obter estatísticas iniciais")
+                return
+            
+            initial_stats = initial_stats_response.json().get("data", {})
+            initial_count = initial_stats.get("total_entries", 0)
+            initial_hours = initial_stats.get("total_hours", 0)
+            
+            # Criar uma oração de teste
+            test_prayer = {
+                "name": "Teste Estatísticas",
+                "time": 120,  # 2 horas
+                "unit": "minutos",
+                "description": "Oração para testar atualização de estatísticas"
+            }
+            
+            create_response = requests.post(f"{self.base_url}/api/prayers", 
+                                          json=test_prayer, timeout=10)
+            
+            if create_response.status_code != 200:
+                self.log_test("Stats After Operations - CREATE", False, 
+                            "Falha ao criar oração de teste")
+                return
+            
+            # Obter estatísticas após criação
+            after_create_response = requests.get(f"{self.base_url}/api/prayers/stats", timeout=10)
+            
+            if after_create_response.status_code == 200:
+                after_create_stats = after_create_response.json().get("data", {})
+                new_count = after_create_stats.get("total_entries", 0)
+                new_hours = after_create_stats.get("total_hours", 0)
+                
+                count_increased = new_count > initial_count
+                hours_increased = new_hours > initial_hours
+                
+                if count_increased and hours_increased:
+                    self.log_test("Stats After Operations", True, 
+                                f"Estatísticas atualizadas corretamente: {initial_count}→{new_count} orações, {initial_hours:.2f}→{new_hours:.2f}h", 
+                                {
+                                    "initial_count": initial_count,
+                                    "new_count": new_count,
+                                    "initial_hours": initial_hours,
+                                    "new_hours": new_hours,
+                                    "hours_added": new_hours - initial_hours
+                                })
+                else:
+                    self.log_test("Stats After Operations", False, 
+                                f"Estatísticas não atualizaram: count {initial_count}→{new_count}, hours {initial_hours:.2f}→{new_hours:.2f}")
+            else:
+                self.log_test("Stats After Operations", False, 
+                            "Falha ao obter estatísticas após criação")
+                
+        except Exception as e:
+            self.log_test("Stats After Operations", False, f"Erro no teste de estatísticas: {str(e)}")
+    
     def test_root_endpoint(self):
         """Testar endpoint raiz"""
         try:
