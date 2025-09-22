@@ -14,7 +14,6 @@ const PrayerSystem = () => {
   const [totalEntries, setTotalEntries] = useState(0);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
-  const navigate = useNavigate();
 
   // API base URL
   const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || 
