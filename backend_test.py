@@ -427,7 +427,7 @@ class PrayerSystemTester:
                                 f"Status 500 sem detalhes do erro: {response.text}")
             else:
                 self.log_test("Update Nonexistent Prayer", False, 
-                            f"Status code inesperado {response.status_code} (esperado 404)", response.text)
+                            f"Status code inesperado {response.status_code} (esperado 404 ou 500)", response.text)
                 
         except Exception as e:
             self.log_test("Update Nonexistent Prayer", False, f"Erro de conexão: {str(e)}")
