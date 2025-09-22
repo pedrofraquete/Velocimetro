@@ -7,7 +7,7 @@
     {
       "test": "Root Endpoint",
       "status": "✅ PASS",
-      "message": "API 2.0.0 - Storage: local",
+      "message": "API 2.0.0 - Storage: supabase",
       "details": {
         "version": "2.0.0",
         "features": [
@@ -15,92 +15,94 @@
           "Local Storage",
           "Hybrid Mode"
         ],
-        "storage_type": "local"
+        "storage_type": "supabase"
       },
-      "timestamp": "2025-09-22T11:03:32.059636"
+      "timestamp": "2025-09-22T11:09:18.279681"
     },
     {
       "test": "Health Endpoint",
       "status": "✅ PASS",
-      "message": "Sistema healthy - Storage: local",
+      "message": "Sistema healthy - Storage: supabase",
       "details": {
-        "total_prayers": 7,
-        "total_hours": 4.33,
-        "progress": "0.43%",
-        "supabase_available": false
+        "total_prayers": 16,
+        "total_hours": 10.08,
+        "progress": "1.01%",
+        "supabase_available": true
       },
-      "timestamp": "2025-09-22T11:03:32.062453"
+      "timestamp": "2025-09-22T11:09:18.643794"
     },
     {
       "test": "Local Data File",
       "status": "✅ PASS",
-      "message": "Arquivo local encontrado com 7 orações",
+      "message": "Arquivo local encontrado com 9 orações",
       "details": {
         "file_path": "/app/backend/prayers_data.json",
-        "prayer_count": 7,
+        "prayer_count": 9,
         "sample_names": [
           "Teste Novo Sistema",
           "Teste Final Sistema",
           "Pedro Fraquete"
         ]
       },
-      "timestamp": "2025-09-22T11:03:32.062695"
+      "timestamp": "2025-09-22T11:09:18.644089"
     },
     {
       "test": "Get Prayers",
       "status": "✅ PASS",
-      "message": "Encontradas 7 orações - Storage: local",
+      "message": "Encontradas 16 orações - Storage: supabase",
       "details": {
-        "count": 7,
+        "count": 16,
         "sample_prayer": {
-          "name": "Teste Novo Sistema",
-          "time": 60,
+          "id": 16,
+          "name": "Teste Supabase",
+          "time": 30,
           "unit": "minutos",
-          "datetime": "2025-09-21T11:45:35.532300",
-          "description": "",
-          "timestamp": 1758469535.532311,
-          "source": "local"
+          "datetime": "2025-09-22T11:07:36.867358+00:00",
+          "description": "Verificação da integração com Supabase",
+          "created_at": "2025-09-22T11:07:36.897839+00:00",
+          "source": "supabase"
         },
-        "storage_type": "local"
+        "storage_type": "supabase"
       },
-      "timestamp": "2025-09-22T11:03:32.065186"
+      "timestamp": "2025-09-22T11:09:18.761389"
     },
     {
       "test": "Prayer Stats",
       "status": "✅ PASS",
-      "message": "Stats: 7 orações, 4.33h (0.43%)",
+      "message": "Stats: 16 orações, 10.08h (1.01%)",
       "details": {
-        "total_hours": 4.33,
-        "total_entries": 7,
-        "progress_percentage": 0.43,
-        "remaining_hours": 995.67,
+        "total_hours": 10.08,
+        "total_entries": 16,
+        "progress_percentage": 1.01,
+        "remaining_hours": 989.92,
         "storage_info": {
-          "supabase_available": false,
-          "primary_storage": "local",
-          "backup_storage": null,
-          "supabase_url": "não configurado"
+          "supabase_available": true,
+          "primary_storage": "supabase",
+          "backup_storage": "local",
+          "supabase_url": "https://ulthrzqgvobultkxlruk.supabase.co..."
         }
       },
-      "timestamp": "2025-09-22T11:03:32.067569"
+      "timestamp": "2025-09-22T11:09:18.959100"
     },
     {
       "test": "Recent Prayers",
       "status": "✅ PASS",
-      "message": "Últimas 5 de 7 orações",
+      "message": "Últimas 5 de 16 orações",
       "details": {
         "recent_count": 5,
-        "total_prayers": 7,
+        "total_prayers": 16,
         "latest_prayer": {
-          "name": "Teste Pós-Supabase",
-          "time": 20,
+          "id": 16,
+          "name": "Teste Supabase",
+          "time": 30,
           "unit": "minutos",
-          "datetime": "2025-09-22T06:51:26.642085",
-          "description": "Sistema funcionando perfeitamente",
-          "timestamp": 1758538286.642095,
-          "source": "local"
+          "datetime": "2025-09-22T11:07:36.867358+00:00",
+          "description": "Verificação da integração com Supabase",
+          "created_at": "2025-09-22T11:07:36.897839+00:00",
+          "source": "supabase"
         }
       },
-      "timestamp": "2025-09-22T11:03:32.069958"
+      "timestamp": "2025-09-22T11:09:19.145112"
     },
     {
       "test": "Add Prayer",
@@ -108,36 +110,45 @@
       "message": "Oração adicionada: Maria Silva - 45 minutos",
       "details": {
         "added_prayer": {
+          "id": 17,
           "name": "Maria Silva",
-          "time": 45,
+          "time_minutes": 45,
           "unit": "minutos",
-          "datetime": "2025-09-22T11:03:32.071710",
-          "timestamp": 1758539012.071717,
-          "description": "Oração de intercessão pela família"
+          "datetime": "2025-09-22T11:09:19.147229+00:00",
+          "description": "Oração de intercessão pela família",
+          "created_at": "2025-09-22T11:09:19.253563+00:00",
+          "updated_at": "2025-09-22T11:09:19.253563+00:00"
         },
         "storage": "unknown"
       },
-      "timestamp": "2025-09-22T11:03:32.072682"
+      "timestamp": "2025-09-22T11:09:19.286386"
     },
     {
       "test": "Supabase Sync",
       "status": "✅ PASS",
-      "message": "Corretamente detectou ausência do Supabase",
+      "message": "Sincronização com Supabase funcionando",
       "details": {
-        "expected_behavior": "Supabase não configurado"
+        "success": true,
+        "message": "Sincronização concluída",
+        "data": {
+          "success": true,
+          "migrated_count": 10,
+          "total_local": 10,
+          "errors": []
+        }
       },
-      "timestamp": "2025-09-22T11:03:32.074702"
+      "timestamp": "2025-09-22T11:09:20.703880"
     },
     {
       "test": "Backup Creation",
       "status": "✅ PASS",
-      "message": "Backup criado com Backup criado com 8 orações",
+      "message": "Backup criado com Backup criado com 27 orações",
       "details": {
         "success": true,
-        "file": "/app/backup_orações_20250922_110332.json",
-        "count": 8
+        "file": "/app/backup_orações_20250922_110920.json",
+        "count": 27
       },
-      "timestamp": "2025-09-22T11:03:32.077446"
+      "timestamp": "2025-09-22T11:09:20.926758"
     }
   ],
   "failures": []
