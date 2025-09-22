@@ -93,7 +93,8 @@ const PrayerSystem = () => {
       const prayerData = {
         name: prayer.name,
         time: prayer.time,
-        unit: prayer.timeUnit === 'hours' ? 'horas' : 'minutos'
+        unit: prayer.timeUnit === 'hours' ? 'horas' : 'minutos',
+        description: prayer.description || ''
       };
 
       // Enviar para API
