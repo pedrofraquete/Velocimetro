@@ -101,3 +101,74 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "verifica se as oracoes estao sendo salvas corretamente no supabase"
+
+backend:
+  - task: "Verificar conexão com Supabase"
+    implemented: true
+    working: false
+    file: "supabase_client.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: false
+        agent: "main"
+        comment: "Sistema híbrido detectado - não há configuração de Supabase (SUPABASE_URL e SUPABASE_KEY não definidos). Sistema funcionando apenas com armazenamento local JSON."
+
+  - task: "Sistema de armazenamento híbrido funcionando"
+    implemented: true
+    working: true
+    file: "hybrid_storage.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Sistema híbrido funciona corretamente com fallback para armazenamento local. Arquivo prayers_data.json contém 7 orações salvas localmente."
+
+  - task: "API endpoints funcionando"
+    implemented: true
+    working: true
+    file: "server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Server FastAPI rodando na porta correta com todos os endpoints implementados."
+
+frontend:
+  - task: "Interface de usuário para orações"
+    implemented: true
+    working: "NA"
+    file: "src/"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Frontend não verificado ainda - foco atual no backend Supabase."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Verificar configuração Supabase"
+    - "Testar salvamento de orações"
+    - "Validar sistema híbrido"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: "Sistema híbrido detectado funcionando apenas com armazenamento local JSON. Precisa configurar SUPABASE_URL e SUPABASE_KEY para ativar integração com Supabase. 7 orações encontradas salvas localmente."
