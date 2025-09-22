@@ -111,11 +111,14 @@ backend:
     file: "supabase_client.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: false
         agent: "main"
         comment: "Sistema híbrido detectado - não há configuração de Supabase (SUPABASE_URL e SUPABASE_KEY não definidos). Sistema funcionando apenas com armazenamento local JSON."
+      - working: false
+        agent: "testing"
+        comment: "CONFIRMADO: Supabase não configurado. Variáveis SUPABASE_URL e SUPABASE_KEY não encontradas no ambiente. Sistema híbrido detecta corretamente a ausência e usa armazenamento local como fallback. Endpoint /api/sync retorna erro esperado 'Supabase não disponível'."
 
   - task: "Sistema de armazenamento híbrido funcionando"
     implemented: true
@@ -123,11 +126,14 @@ backend:
     file: "hybrid_storage.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "Sistema híbrido funciona corretamente com fallback para armazenamento local. Arquivo prayers_data.json contém 7 orações salvas localmente."
+      - working: true
+        agent: "testing"
+        comment: "TESTADO E FUNCIONANDO: Sistema híbrido detecta ausência do Supabase e usa armazenamento local. CORREÇÃO APLICADA: Corrigido path hardcoded incorreto de '/home/ubuntu/Velocimetro/backend/' para '/app/backend/'. Agora salva e lê corretamente do arquivo prayers_data.json com 8 orações (7 existentes + 1 teste). Backup funcionando corretamente."
 
   - task: "API endpoints funcionando"
     implemented: true
@@ -135,11 +141,14 @@ backend:
     file: "server.py"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "Server FastAPI rodando na porta correta com todos os endpoints implementados."
+      - working: true
+        agent: "testing"
+        comment: "TODOS OS ENDPOINTS TESTADOS E FUNCIONANDO: GET /api/health (sistema healthy, 8 orações, 5.08h, 0.51% progresso), GET /api/prayers (retorna 8 orações corretamente), GET /api/prayers/stats (estatísticas corretas), POST /api/prayers (adiciona orações com sucesso), GET /api/prayers/recent (funciona), POST /api/sync (detecta Supabase ausente), POST /api/backup (cria backup), GET / (info da API). Taxa de sucesso: 100%."
 
 frontend:
   - task: "Interface de usuário para orações"
