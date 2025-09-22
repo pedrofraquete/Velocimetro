@@ -1,0 +1,129 @@
+{
+  "total_tests": 9,
+  "passed_tests": 7,
+  "failed_tests": 2,
+  "success_rate": 77.77777777777779,
+  "results": [
+    {
+      "test": "Root Endpoint",
+      "status": "✅ PASS",
+      "message": "API 2.0.0 - Storage: local",
+      "details": {
+        "version": "2.0.0",
+        "features": [
+          "Supabase",
+          "Local Storage",
+          "Hybrid Mode"
+        ],
+        "storage_type": "local"
+      },
+      "timestamp": "2025-09-22T11:03:02.423755"
+    },
+    {
+      "test": "Health Endpoint",
+      "status": "✅ PASS",
+      "message": "Sistema healthy - Storage: local",
+      "details": {
+        "total_prayers": 0,
+        "total_hours": 0,
+        "progress": "0%",
+        "supabase_available": false
+      },
+      "timestamp": "2025-09-22T11:03:02.426588"
+    },
+    {
+      "test": "Local Data File",
+      "status": "✅ PASS",
+      "message": "Arquivo local encontrado com 7 orações",
+      "details": {
+        "file_path": "/app/backend/prayers_data.json",
+        "prayer_count": 7,
+        "sample_names": [
+          "Teste Novo Sistema",
+          "Teste Final Sistema",
+          "Pedro Fraquete"
+        ]
+      },
+      "timestamp": "2025-09-22T11:03:02.426851"
+    },
+    {
+      "test": "Get Prayers",
+      "status": "✅ PASS",
+      "message": "Encontradas 0 orações - Storage: local",
+      "details": {
+        "count": 0,
+        "sample_prayer": null,
+        "storage_type": "local"
+      },
+      "timestamp": "2025-09-22T11:03:02.429116"
+    },
+    {
+      "test": "Prayer Stats",
+      "status": "✅ PASS",
+      "message": "Stats: 0 orações, 0h (0%)",
+      "details": {
+        "total_hours": 0,
+        "total_entries": 0,
+        "progress_percentage": 0,
+        "remaining_hours": 1000,
+        "storage_info": {
+          "supabase_available": false,
+          "primary_storage": "local",
+          "backup_storage": null,
+          "supabase_url": "não configurado"
+        }
+      },
+      "timestamp": "2025-09-22T11:03:02.433319"
+    },
+    {
+      "test": "Recent Prayers",
+      "status": "✅ PASS",
+      "message": "Últimas 0 de 0 orações",
+      "details": {
+        "recent_count": 0,
+        "total_prayers": 0,
+        "latest_prayer": null
+      },
+      "timestamp": "2025-09-22T11:03:02.435694"
+    },
+    {
+      "test": "Add Prayer",
+      "status": "❌ FAIL",
+      "message": "Status code 500",
+      "details": "{\"detail\":\"500: [Errno 2] No such file or directory: '/home/ubuntu/Velocimetro/backend/prayers_data.json'\"}",
+      "timestamp": "2025-09-22T11:03:02.438309"
+    },
+    {
+      "test": "Supabase Sync",
+      "status": "✅ PASS",
+      "message": "Corretamente detectou ausência do Supabase",
+      "details": {
+        "expected_behavior": "Supabase não configurado"
+      },
+      "timestamp": "2025-09-22T11:03:02.440349"
+    },
+    {
+      "test": "Backup Creation",
+      "status": "❌ FAIL",
+      "message": "Status code 500",
+      "details": "{\"detail\":\"500: [Errno 2] No such file or directory: '/home/ubuntu/Velocimetro/backup_orações_20250922_110302.json'\"}",
+      "timestamp": "2025-09-22T11:03:02.442537"
+    }
+  ],
+  "failures": [
+    {
+      "test": "Add Prayer",
+      "status": "❌ FAIL",
+      "message": "Status code 500",
+      "details": "{\"detail\":\"500: [Errno 2] No such file or directory: '/home/ubuntu/Velocimetro/backend/prayers_data.json'\"}",
+      "timestamp": "2025-09-22T11:03:02.438309"
+    },
+    {
+      "test": "Backup Creation",
+      "status": "❌ FAIL",
+      "message": "Status code 500",
+      "details": "{\"detail\":\"500: [Errno 2] No such file or directory: '/home/ubuntu/Velocimetro/backup_orações_20250922_110302.json'\"}",
+      "timestamp": "2025-09-22T11:03:02.442537"
+    }
+  ]
+}
