@@ -217,6 +217,42 @@ class HybridStorage:
         except Exception as e:
             return {"success": False, "error": str(e)}
     
+    def update_prayer(self, prayer_id: int, name: str, time_minutes: int, description: str = "", unit: str = "minutos") -> Dict:
+        """Atualizar uma oração usando o melhor método disponível"""
+        try:
+            # Tentar Supabase primeiro
+            if self.supabase_available and self.supabase_manager:
+                result = self.supabase_manager.update_prayer(prayer_id, name, time_minutes, description, unit)
+                if result["success"]:
+                    return result
+                else:
+                    print("⚠️  Falha no Supabase para atualização")
+            
+            # Fallback para arquivo local (limitado - não suporta IDs específicos)
+            return {"success": False, "error": "Atualização só disponível com Supabase"}
+            
+        except Exception as e:
+            print(f"❌ Erro ao atualizar oração: {e}")
+            return {"success": False, "error": str(e)}
+    
+    def delete_prayer(self, prayer_id: int) -> Dict:
+        """Excluir uma oração usando o melhor método disponível"""
+        try:
+            # Tentar Supabase primeiro
+            if self.supabase_available and self.supabase_manager:
+                result = self.supabase_manager.delete_prayer(prayer_id)
+                if result["success"]:
+                    return result
+                else:
+                    print("⚠️  Falha no Supabase para exclusão")
+            
+            # Fallback para arquivo local (limitado - não suporta IDs específicos)
+            return {"success": False, "error": "Exclusão só disponível com Supabase"}
+            
+        except Exception as e:
+            print(f"❌ Erro ao excluir oração: {e}")
+            return {"success": False, "error": str(e)}
+
     def create_backup(self) -> Dict:
         """Criar backup dos dados"""
         try:
