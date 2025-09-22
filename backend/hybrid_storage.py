@@ -12,7 +12,7 @@ from typing import List, Dict, Optional
 class HybridStorage:
     def __init__(self):
         """Inicializar sistema híbrido"""
-        self.local_file = "/home/ubuntu/Velocimetro/backend/prayers_data.json"
+        self.local_file = "/app/backend/prayers_data.json"
         self.supabase_available = False
         self.supabase_manager = None
         
