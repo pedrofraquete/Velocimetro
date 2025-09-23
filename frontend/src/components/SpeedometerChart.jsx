@@ -83,8 +83,9 @@ const SpeedometerChart = ({ totalHours }) => {
       }
     }
 
-    // Calculate needle position
-    const progress = Math.min(totalHours / maxHours, 1);
+    // Calculate needle position - garantir que totalHours seja um número válido
+    const safeTotalHours = typeof totalHours === 'number' && !isNaN(totalHours) ? totalHours : 0;
+    const progress = Math.min(safeTotalHours / maxHours, 1);
     const needleAngle = Math.PI + progress * Math.PI;
     
     // Draw needle
@@ -110,7 +111,7 @@ const SpeedometerChart = ({ totalHours }) => {
     ctx.fillStyle = '#1e293b';
     ctx.font = `bold ${isMobile ? '18' : '24'}px Inter, system-ui, sans-serif`;
     ctx.textAlign = 'center';
-    ctx.fillText(`${totalHours.toFixed(1)}h`, centerX, centerY + (isMobile ? 30 : 40));
+    ctx.fillText(`${safeTotalHours.toFixed(1)}h`, centerX, centerY + (isMobile ? 30 : 40));
     
     ctx.fillStyle = '#64748b';
     ctx.font = `${isMobile ? '12' : '14'}px Inter, system-ui, sans-serif`;

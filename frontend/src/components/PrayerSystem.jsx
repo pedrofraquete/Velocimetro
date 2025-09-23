@@ -129,9 +129,10 @@ const PrayerSystem = () => {
     }
   };
 
-  // Calcular progresso
-  const progressPercentage = totalHours > 0 ? (totalHours / 1000) * 100 : 0;
-  const remainingHours = Math.max(0, 1000 - totalHours);
+  // Calcular progresso - garantir que totalHours seja um número válido
+  const safeTotal = typeof totalHours === 'number' && !isNaN(totalHours) ? totalHours : 0;
+  const progressPercentage = safeTotal > 0 ? (safeTotal / 1000) * 100 : 0;
+  const remainingHours = Math.max(0, 1000 - safeTotal);
 
   if (loading) {
     return (
@@ -175,7 +176,7 @@ const PrayerSystem = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600 mb-1">Total de Horas</p>
-                <p className="text-3xl font-bold text-emerald-600">{totalHours}</p>
+                <p className="text-3xl font-bold text-emerald-600">{safeTotal.toFixed(1)}</p>
                 <p className="text-xs text-gray-500">de 1000 horas</p>
               </div>
               <Clock className="w-8 h-8 text-emerald-600" />
@@ -197,7 +198,7 @@ const PrayerSystem = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600 mb-1">Progresso</p>
-                <p className="text-3xl font-bold text-purple-600">{progressPercentage.toFixed(1)}%</p>
+                <p className="text-3xl font-bold text-purple-600">{(typeof progressPercentage === 'number' && !isNaN(progressPercentage) ? progressPercentage : 0).toFixed(1)}%</p>
                 <p className="text-xs text-gray-500">da meta alcançada</p>
               </div>
               <Heart className="w-8 h-8 text-purple-600" />
@@ -221,7 +222,7 @@ const PrayerSystem = () => {
             <Heart className="w-6 h-6 text-purple-600 mr-2" />
             <h2 className="text-2xl font-bold text-gray-800">📊 Progresso das Orações</h2>
           </div>
-          <SpeedometerChart currentHours={totalHours} maxHours={1000} />
+          <SpeedometerChart totalHours={safeTotal} maxHours={1000} />
         </div>
 
         {/* Prayer Form */}
