@@ -1,27 +1,27 @@
 """
-Servidor FastAPI - EXCLUSIVAMENTE SUPABASE
-ZERO armazenamento local - TODOS os dados APENAS no Supabase
-Sistema FALHA se Supabase não funcionar (comportamento desejado)
+Servidor FastAPI - EXCLUSIVAMENTE Supabase
+TODOS os dados são salvos e lidos APENAS do Supabase
+NÃO há fallback para armazenamento local
 """
 
-import os
-import sys
-from datetime import datetime
-from typing import List, Optional
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from supabase import create_client, Client
-import logging
+from typing import Optional
+import uvicorn
+from datetime import datetime
+import os
+from dotenv import load_dotenv
 
-# Configurar logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+# Carregar variáveis de ambiente
+load_dotenv()
 
-# Inicializar FastAPI
-app = FastAPI(title="Sistema de Orações - EXCLUSIVAMENTE Supabase")
+# Importar sistema EXCLUSIVO Supabase
+from supabase_storage import get_storage
 
-# CORS
+app = FastAPI(title="Sistema de Orações Igreja Videira - EXCLUSIVAMENTE Supabase")
+
+# Configurar CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -30,26 +30,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Configuração Supabase
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
-
-if not SUPABASE_URL or not SUPABASE_KEY:
-    logger.error("❌ ERRO CRÍTICO: Variáveis SUPABASE_URL e SUPABASE_KEY não encontradas!")
-    logger.error("❌ Sistema não pode funcionar sem Supabase!")
-    sys.exit(1)
-
-# Inicializar cliente Supabase
-try:
-    supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
-    logger.info("✅ Cliente Supabase inicializado com sucesso")
-except Exception as e:
-    logger.error(f"❌ ERRO CRÍTICO: Não foi possível inicializar Supabase: {e}")
-    logger.error("🚨 Sistema não pode funcionar sem Supabase!")
-    sys.exit(1)
-
 # Modelos Pydantic
-class PrayerCreate(BaseModel):
+class PrayerRequest(BaseModel):
     name: str
     time_minutes: int
     description: Optional[str] = ""
@@ -59,232 +41,188 @@ class PrayerUpdate(BaseModel):
     name: Optional[str] = None
     time_minutes: Optional[int] = None
     description: Optional[str] = None
+    unit: Optional[str] = None
 
-class PrayerResponse(BaseModel):
-    id: int
-    name: str
-    time_minutes: int
-    unit: str
-    datetime: str
-    description: Optional[str]
-    created_at: str
+# Inicializar armazenamento EXCLUSIVO Supabase
+try:
+    storage = get_storage()
+    print("✅ Servidor iniciado com armazenamento EXCLUSIVO Supabase")
+    print("🚫 NÃO há armazenamento local - TODOS os dados no Supabase")
+except Exception as e:
+    print(f"❌ ERRO CRÍTICO: Não foi possível inicializar Supabase: {e}")
+    print("🚨 Servidor não pode funcionar sem Supabase!")
+    print("📋 Verifique se as variáveis SUPABASE_URL e SUPABASE_KEY estão configuradas")
+    exit(1)
 
-class StatsResponse(BaseModel):
-    total_hours: float
-    total_entries: int
-    progress_percentage: float
-
-# Função para verificar conexão Supabase
-def check_supabase_connection():
-    """Verifica se Supabase está funcionando"""
-    try:
-        # Tentar fazer uma consulta simples
-        result = supabase.table('prayers').select('id').limit(1).execute()
-        return True
-    except Exception as e:
-        logger.error(f"❌ Erro de conexão com Supabase: {e}")
-        return False
-
-# Startup event
-@app.on_event("startup")
-async def startup_event():
-    """Verificar Supabase na inicialização"""
-    logger.info("🔄 Verificando conexão com Supabase...")
-    
-    if not check_supabase_connection():
-        logger.error("❌ ERRO CRÍTICO: Não foi possível conectar ao Supabase!")
-        logger.error("🚨 Sistema não pode funcionar sem Supabase!")
-        sys.exit(1)
-    
-    logger.info("✅ Supabase conectado com sucesso!")
-    logger.info("🎯 Sistema funcionando EXCLUSIVAMENTE com Supabase")
-
-# Health check
-@app.get("/api/health")
-async def health_check():
-    """Health check que verifica Supabase"""
-    if not check_supabase_connection():
-        raise HTTPException(
-            status_code=503, 
-            detail="Supabase não disponível - Sistema não pode funcionar"
-        )
-    
+@app.get("/")
+async def root():
+    """Endpoint raiz"""
     return {
-        "status": "healthy",
-        "message": "Sistema funcionando EXCLUSIVAMENTE com Supabase",
-        "supabase": "connected"
+        "message": "Sistema de Orações Igreja Videira - EXCLUSIVAMENTE Supabase",
+        "storage": "supabase_only",
+        "status": "connected",
+        "version": "2.0",
+        "local_storage": False
     }
 
-# Listar orações
+@app.get("/api/health")
+async def health_check():
+    """Verificar saúde do sistema"""
+    try:
+        info = storage.get_storage_info()
+        return {
+            "status": "healthy",
+            "storage": info,
+            "timestamp": datetime.now().isoformat(),
+            "supabase_only": True
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Sistema não saudável: {str(e)}")
+
+@app.post("/api/prayers")
+async def add_prayer(prayer: PrayerRequest):
+    """Adicionar nova oração - EXCLUSIVAMENTE no Supabase"""
+    try:
+        result = storage.add_prayer(
+            name=prayer.name,
+            time_minutes=prayer.time_minutes,
+            description=prayer.description,
+            unit=prayer.unit
+        )
+        
+        return {
+            "success": True,
+            "message": "Oração adicionada com sucesso no Supabase!",
+            "data": result,
+            "storage": "supabase_only"
+        }
+        
+    except Exception as e:
+        print(f"❌ Erro ao adicionar oração: {e}")
+        raise HTTPException(status_code=500, detail=f"Erro ao salvar no Supabase: {str(e)}")
+
 @app.get("/api/prayers")
 async def get_prayers():
-    """Buscar TODAS as orações do Supabase"""
+    """Buscar todas as orações - EXCLUSIVAMENTE do Supabase"""
     try:
-        result = supabase.table('prayers').select('*').order('created_at', desc=True).execute()
+        prayers = storage.get_all_prayers()
         
-        prayers = []
-        for prayer in result.data:
-            prayers.append({
-                "id": prayer["id"],
-                "name": prayer["name"],
-                "time_minutes": prayer["time_minutes"],
-                "unit": prayer.get("unit", "minutos"),
-                "datetime": prayer["datetime"],
-                "description": prayer.get("description", ""),
-                "created_at": prayer["created_at"]
-            })
-        
-        logger.info(f"✅ Carregadas {len(prayers)} orações do Supabase")
         return {
             "success": True,
             "data": prayers,
-            "message": f"Dados carregados do Supabase: {len(prayers)} orações"
+            "count": len(prayers),
+            "storage": "supabase_only"
         }
         
     except Exception as e:
-        logger.error(f"❌ Erro ao buscar orações no Supabase: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail=f"Erro ao conectar com Supabase: {str(e)}"
-        )
+        print(f"❌ Erro ao buscar orações: {e}")
+        raise HTTPException(status_code=500, detail=f"Erro ao carregar do Supabase: {str(e)}")
 
-# Adicionar oração
-@app.post("/api/prayers")
-async def add_prayer(prayer: PrayerCreate):
-    """Adicionar oração EXCLUSIVAMENTE no Supabase"""
+@app.get("/api/prayers/stats")
+async def get_prayer_stats():
+    """Obter estatísticas das orações - EXCLUSIVAMENTE do Supabase"""
     try:
-        # Preparar dados
-        prayer_data = {
-            "name": prayer.name,
-            "time_minutes": prayer.time_minutes,
-            "unit": prayer.unit,
-            "datetime": datetime.now().isoformat(),
-            "description": prayer.description or ""
+        stats = storage.get_prayer_stats()
+        
+        return {
+            "success": True,
+            "data": {
+                "total_entries": stats["total_prayers"],
+                "total_hours": stats["total_hours"],
+                "total_minutes": stats["total_minutes"],
+                "progress_percentage": stats["progress_percentage"],
+                "remaining_hours": stats["remaining_hours"]
+            },
+            "storage": "supabase_only"
         }
         
-        # Inserir no Supabase
-        result = supabase.table('prayers').insert(prayer_data).execute()
-        
-        if result.data:
-            logger.info(f"✅ Oração salva no Supabase: {prayer.name} - {prayer.time_minutes}min")
-            return {
-                "success": True,
-                "data": result.data[0],
-                "message": "Oração salva no Supabase com sucesso"
-            }
-        else:
-            raise Exception("Nenhum dado retornado do Supabase")
-            
     except Exception as e:
-        logger.error(f"❌ Erro ao salvar oração no Supabase: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail=f"Erro ao salvar no Supabase: {str(e)}"
-        )
+        print(f"❌ Erro ao calcular estatísticas: {e}")
+        raise HTTPException(status_code=500, detail=f"Erro ao calcular estatísticas do Supabase: {str(e)}")
 
-# Atualizar oração
 @app.put("/api/prayers/{prayer_id}")
-async def update_prayer(prayer_id: int, prayer: PrayerUpdate):
-    """Atualizar oração EXCLUSIVAMENTE no Supabase"""
+async def update_prayer(prayer_id: str, updates: PrayerUpdate):
+    """Atualizar oração - EXCLUSIVAMENTE no Supabase"""
     try:
         # Preparar dados para atualização
         update_data = {}
-        if prayer.name is not None:
-            update_data["name"] = prayer.name
-        if prayer.time_minutes is not None:
-            update_data["time_minutes"] = prayer.time_minutes
-        if prayer.description is not None:
-            update_data["description"] = prayer.description
+        if updates.name is not None:
+            update_data["name"] = updates.name
+        if updates.time_minutes is not None:
+            update_data["time_minutes"] = updates.time_minutes
+        if updates.description is not None:
+            update_data["description"] = updates.description
+        if updates.unit is not None:
+            update_data["unit"] = updates.unit
         
-        update_data["updated_at"] = datetime.now().isoformat()
+        if not update_data:
+            raise HTTPException(status_code=400, detail="Nenhum campo para atualizar")
         
-        # Atualizar no Supabase
-        result = supabase.table('prayers').update(update_data).eq('id', prayer_id).execute()
+        success = storage.update_prayer(prayer_id, update_data)
         
-        if result.data:
-            logger.info(f"✅ Oração atualizada no Supabase: ID {prayer_id}")
+        if success:
             return {
                 "success": True,
-                "data": result.data[0],
-                "message": "Oração atualizada no Supabase com sucesso"
+                "message": "Oração atualizada com sucesso no Supabase!",
+                "storage": "supabase_only"
             }
         else:
-            raise HTTPException(status_code=404, detail="Oração não encontrada no Supabase")
+            raise HTTPException(status_code=404, detail="Oração não encontrada")
             
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"❌ Erro ao atualizar oração no Supabase: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail=f"Erro ao atualizar no Supabase: {str(e)}"
-        )
+        print(f"❌ Erro ao atualizar oração: {e}")
+        raise HTTPException(status_code=500, detail=f"Erro ao atualizar no Supabase: {str(e)}")
 
-# Excluir oração
 @app.delete("/api/prayers/{prayer_id}")
-async def delete_prayer(prayer_id: int):
-    """Excluir oração EXCLUSIVAMENTE do Supabase"""
+async def delete_prayer(prayer_id: str):
+    """Excluir oração - EXCLUSIVAMENTE do Supabase"""
     try:
-        # Excluir do Supabase
-        result = supabase.table('prayers').delete().eq('id', prayer_id).execute()
+        success = storage.delete_prayer(prayer_id)
         
-        if result.data:
-            logger.info(f"✅ Oração excluída do Supabase: ID {prayer_id}")
+        if success:
             return {
                 "success": True,
-                "message": "Oração excluída do Supabase com sucesso"
+                "message": "Oração excluída com sucesso do Supabase!",
+                "storage": "supabase_only"
             }
         else:
-            raise HTTPException(status_code=404, detail="Oração não encontrada no Supabase")
+            raise HTTPException(status_code=404, detail="Oração não encontrada")
             
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"❌ Erro ao excluir oração do Supabase: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail=f"Erro ao excluir do Supabase: {str(e)}"
-        )
+        print(f"❌ Erro ao excluir oração: {e}")
+        raise HTTPException(status_code=500, detail=f"Erro ao excluir do Supabase: {str(e)}")
 
-# Estatísticas
-@app.get("/api/prayers/stats")
-async def get_stats():
-    """Calcular estatísticas EXCLUSIVAMENTE do Supabase"""
+@app.get("/api/storage/info")
+async def get_storage_info():
+    """Informações sobre o armazenamento"""
     try:
-        # Buscar todas as orações do Supabase
-        result = supabase.table('prayers').select('time_minutes').execute()
-        
-        prayers = result.data
-        total_entries = len(prayers)
-        total_minutes = sum(prayer['time_minutes'] for prayer in prayers)
-        total_hours = round(total_minutes / 60, 2)
-        progress_percentage = round((total_hours / 1000) * 100, 2)
-        
-        stats = {
-            "total_hours": total_hours,
-            "total_entries": total_entries,
-            "progress_percentage": progress_percentage,
-            "total_minutes": total_minutes,
-            "remaining_hours": round(1000 - total_hours, 2)
-        }
-        
-        logger.info(f"✅ Estatísticas calculadas do Supabase: {total_hours}h, {total_entries} orações")
+        info = storage.get_storage_info()
         return {
             "success": True,
-            "data": stats,
-            "message": "Estatísticas calculadas do Supabase"
+            "data": info
         }
-        
     except Exception as e:
-        logger.error(f"❌ Erro ao calcular estatísticas do Supabase: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail=f"Erro ao calcular estatísticas do Supabase: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Erro ao obter informações: {str(e)}")
 
-# Executar servidor
 if __name__ == "__main__":
-    import uvicorn
-    logger.info("🚀 Iniciando servidor EXCLUSIVAMENTE Supabase...")
-    logger.info("🚫 ZERO armazenamento local - TODOS os dados no Supabase")
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    print("🚀 Iniciando servidor EXCLUSIVAMENTE Supabase...")
+    print("📊 TODOS os dados serão salvos APENAS no Supabase")
+    print("🚫 NÃO há armazenamento local")
+    print("🔧 Certifique-se de que SUPABASE_URL e SUPABASE_KEY estão configurados")
+    
+    # Verificar variáveis de ambiente
+    if not os.getenv("SUPABASE_URL") or not os.getenv("SUPABASE_KEY"):
+        print("❌ ERRO: Variáveis de ambiente SUPABASE_URL e SUPABASE_KEY não configuradas!")
+        print("📋 Copie .env.example para .env e configure as credenciais")
+        exit(1)
+    
+    uvicorn.run(
+        "server:app",
+        host="0.0.0.0",
+        port=int(os.getenv("PORT", 8000)),
+        reload=True
+    )
